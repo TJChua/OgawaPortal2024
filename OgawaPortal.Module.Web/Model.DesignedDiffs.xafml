@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="Logo">
+  <Options CollectionsEditMode="Edit" />
+  <SchemaModules>
+    <SchemaModule Name="SystemAspNetModule" Version="22.2.3.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="22.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.Drawing.Color" EditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxColorPickerPropertyEditor" />
+    </PropertyEditor>
+  </ViewItems>
+  <Views>
+    <DetailView Id="AuthenticationStandardLogonParameters_DetailView">
+      <Items>
+        <StaticImage Id="LogonImage" ImageName="Security" HorizontalAlign="Center" />
+      </Items>
+    </DetailView>
+    <DetailView Id="vwItemMasters_DetailView" AllowEdit="False" />
+    <DetailView Id="vwOutlets_DetailView" AllowEdit="False" />
+    <DetailView Id="vwPrice_DetailView" AllowEdit="False" />
+    <DetailView Id="vwSalesRep_DetailView" AllowEdit="False" />
+    <DetailView Id="vwTax_DetailView" AllowEdit="False" />
+    <DetailView Id="vwWarehouse_DetailView" AllowEdit="False" />
+  </Views>
+</Application>

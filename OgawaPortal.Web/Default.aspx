@@ -71,10 +71,10 @@ background-blend-mode: screen;">
             border-right:none !important;
         }
 /*        Module header*/
-        .white
+/*       white
         {
             background-color:transparent !important;
-        }
+        }*/
 /*      .dxeEditArea_XafTheme.dxeDisabled_XafTheme
         {
             background-color:antiquewhite;
@@ -87,6 +87,10 @@ background-blend-mode: screen;">
         {
               background-color:lightyellow !important;
         }*/
+        .dx-ar > *
+        {
+            float :left !important;
+        }
     </style>
     <form id="form2" runat="server">
     <cc4:ASPxProgressControl ID="ProgressControl" runat="server" />

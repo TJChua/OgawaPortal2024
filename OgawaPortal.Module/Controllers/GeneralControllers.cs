@@ -1,10 +1,6 @@
-﻿using DevExpress.Data.Filtering;
-using DevExpress.ExpressApp;
-using DevExpress.ExpressApp.Actions;
+﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Editors;
-using DevExpress.ExpressApp.Layout;
-using DevExpress.ExpressApp.Model.NodeGenerators;
-using DevExpress.ExpressApp.SystemModule;
+using DevExpress.Web;
 using DevExpress.Xpo.DB.Helpers;
 
 namespace OgawaPortal.Module.Controllers
@@ -61,6 +57,16 @@ namespace OgawaPortal.Module.Controllers
             options.Win.Caption = caption;
             options.Win.Type = WinMessageType.Flyout;
             Application.ShowViewStrategy.ShowMessage(options);
+        }
+
+        // Remove selected row
+        public void ResetGridSelectionCore(object control)
+        {
+            ASPxGridView gridView = control as ASPxGridView;
+            if (gridView != null)
+            {
+                gridView.Selection.UnselectAll();
+            }
         }
     }
 }

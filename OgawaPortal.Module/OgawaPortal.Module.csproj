@@ -65,6 +65,7 @@
     <Reference Include="DevExpress.ExpressApp.Validation.v22.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.ExpressApp.Web.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Xpo.v22.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -81,6 +82,7 @@
     <Reference Include="DevExpress.Printing.v22.2.Core">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.Web.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpo.v22.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -107,6 +109,7 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -129,21 +132,48 @@
     <Compile Include="BusinessObjects\Maintenance\ExchangeType.cs" />
     <Compile Include="BusinessObjects\Maintenance\GSTDates.cs" />
     <Compile Include="BusinessObjects\Maintenance\Instalment.cs" />
+    <Compile Include="BusinessObjects\Maintenance\OGW10SLYT.cs" />
+    <Compile Include="BusinessObjects\Maintenance\PaymentMethod.cs" />
     <Compile Include="BusinessObjects\Maintenance\Races.cs" />
     <Compile Include="BusinessObjects\Maintenance\Translate.cs" />
     <Compile Include="BusinessObjects\Maintenance\Transporter.cs" />
     <Compile Include="BusinessObjects\Maintenance\Voucher.cs" />
+    <Compile Include="BusinessObjects\Nonpersistent\OGW10OITMBrowse.cs" />
+    <Compile Include="BusinessObjects\Sales Order\OGW10ORDR.cs" />
+    <Compile Include="BusinessObjects\Sales Order\OGW11ORDR.cs" />
+    <Compile Include="BusinessObjects\Sales Order\OGW12ORDR.cs" />
+    <Compile Include="BusinessObjects\Sales Order\OGW15ORDR.cs" />
+    <Compile Include="BusinessObjects\View\vwObjType.cs" />
     <Compile Include="BusinessObjects\View\vwItemMasters.cs" />
     <Compile Include="BusinessObjects\View\vwOutlets.cs" />
     <Compile Include="BusinessObjects\View\vwPrice.cs" />
     <Compile Include="BusinessObjects\View\vwSalesRep.cs" />
+    <Compile Include="BusinessObjects\View\vwStatus.cs" />
     <Compile Include="BusinessObjects\View\vwTax.cs" />
     <Compile Include="BusinessObjects\View\vwWarehouse.cs" />
+    <Compile Include="Controllers\GenButtonControllers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\GenButtonControllers.Designer.cs">
+      <DependentUpon>GenButtonControllers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\GeneralControllers.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controllers\GeneralControllers.Designer.cs">
       <DependentUpon>GeneralControllers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NonpersistentControllers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\NonpersistentControllers.Designer.cs">
+      <DependentUpon>NonpersistentControllers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SalesControllers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\SalesControllers.Designer.cs">
+      <DependentUpon>SalesControllers.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseUpdate\Updater.cs" />
     <Compile Include="BusinessObjects\ApplicationUser.cs" />
@@ -157,6 +187,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\GenButtonControllers.resx">
+      <DependentUpon>GenButtonControllers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\NonpersistentControllers.resx">
+      <DependentUpon>NonpersistentControllers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>

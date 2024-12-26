@@ -1,5 +1,6 @@
 ﻿using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System.ComponentModel;
@@ -41,6 +42,9 @@ namespace OgawaPortal.Module.BusinessObjects.View
 
         [VisibleInLookupListView(true), VisibleInListView(true), VisibleInDetailView(true)]
         [Appearance("Rate", Enabled = false)]
+        [DbType("numeric(19,6)")]
+        [ModelDefault("DisplayFormat", "n2")]
+        [ModelDefault("EditMask", "n2")]
         public decimal Rate { get; set; }
     }
 }

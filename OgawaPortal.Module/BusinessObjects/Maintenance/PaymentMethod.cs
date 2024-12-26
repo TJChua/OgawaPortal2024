@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace OgawaPortal.Module.BusinessObjects.Maintenance
 {
     [NavigationItem("Maintenance")]
-    [XafDisplayName("District")]
+    [XafDisplayName("Payment Method")]
     [DefaultProperty("Code")]
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
@@ -19,16 +19,15 @@ namespace OgawaPortal.Module.BusinessObjects.Maintenance
     //[Appearance("HideResetViewSetting", AppearanceItemType.Action, "True", TargetItems = "ResetViewSettings", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideExport", AppearanceItemType.Action, "True", TargetItems = "Export", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     //[Appearance("HideRefresh", AppearanceItemType.Action, "True", TargetItems = "Refresh", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    public class District : XPObject
+    public class PaymentMethod : XPObject
     { 
-        public District(Session session)
+        public PaymentMethod(Session session)
             : base(session)
         {
         }
         public override void AfterConstruction()
         {
             base.AfterConstruction();
-
             CreateUser = Session.GetObjectByKey<ApplicationUser>(SecuritySystem.CurrentUserId).UserName;
             CreateDate = DateTime.Now;
             IsActive = true;

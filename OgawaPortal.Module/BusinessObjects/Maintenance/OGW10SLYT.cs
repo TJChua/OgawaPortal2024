@@ -14,7 +14,7 @@ namespace OgawaPortal.Module.BusinessObjects.Maintenance
 {
     [XafDisplayName("Layouts")]
     [DefaultProperty("Name")]
-    [NavigationItem("Maintenance")]
+    [NavigationItem("System Initialization")]
     [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]

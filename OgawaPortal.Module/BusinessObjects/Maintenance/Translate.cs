@@ -10,7 +10,6 @@ using System.ComponentModel;
 
 namespace OgawaPortal.Module.BusinessObjects.Maintenance
 {
-    [DefaultClassOptions]
     [NavigationItem("Maintenance")]
     [XafDisplayName("Translate")]
     [DefaultProperty("Code")]

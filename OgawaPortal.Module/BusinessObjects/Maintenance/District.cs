@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace OgawaPortal.Module.BusinessObjects.Maintenance
 {
-    [NavigationItem("Maintenance")]
+    [NavigationItem("System Initialization")]
     [XafDisplayName("District")]
     [DefaultProperty("Code")]
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]

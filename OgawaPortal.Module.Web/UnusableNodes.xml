@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Maintenance">
+        <Items Id="Items">
+          <Item Id="Country_ListView" Index="6" />
+          <Item Id="District_ListView" Index="8" />
+          <Item Id="Races_ListView" Index="16" />
+          <Item Id="OGW10SLYT_ListView" Index="20" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

@@ -2,31 +2,16 @@
 <Application Logo="Logo" Title="Ogawa Portal">
   <NavigationItems>
     <Items>
-      <Item Id="Maintenance">
+	  <Item Id="Default" Index="0" />
+      <Item Id="System Initialization" Index="1">
         <Items>
-          <Item Id="CancelType_ListView" Index="0" />
-          <Item Id="CardIssuer_ListView" Index="1" />
-          <Item Id="CardMachineBank_ListView" Index="2" />
-          <Item Id="CardType_ListView" Index="3" />
-          <Item Id="CloseType_ListView" Index="4" />
-          <Item Id="Consignment_ListView" Index="5" />
-          <Item Id="Country_ListView" Index="6" />
-          <Item Id="Customer_ListView" Index="7" />
-          <Item Id="District_ListView" Index="8" />
-          <Item Id="DeliveryDateControl_ListView" Index="9" />
-          <Item Id="Discount_ListView" Index="10" />
-          <Item Id="DiscountControl_ListView" Index="11" />
-          <Item Id="DiscountType_ListView" Index="12" />
-          <Item Id="ExchangeType_ListView" Index="13" />
-          <Item Id="GSTDates_ListView" Index="14" />
-          <Item Id="Instalment_ListView" Index="15" />
-          <Item Id="Races_ListView" Index="16" />
-          <Item Id="Translate_ListView" Index="17" />
-          <Item Id="Transporter_ListView" Index="18" />
-          <Item Id="Voucher_ListView" Index="19" />
-          <Item Id="OGW10SLYT_ListView" Index="20" />
+          <Item Id="OGW10SLYT_ListView" Index="0" />
+          <Item Id="Country_ListView" Index="1" />
         </Items>
       </Item>
+      <Item Id="Maintenance" Index="2" />
+      <Item Id="POS - Sales" Index="3" />
+	  <Item Id="SAP" Index="4" />	
     </Items>
   </NavigationItems>
   <Options CollectionsEditMode="Edit" />

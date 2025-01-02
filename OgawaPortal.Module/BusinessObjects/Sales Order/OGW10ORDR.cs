@@ -20,6 +20,7 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
     [XafDisplayName("POS Sales")]
     [DefaultProperty("DocNum")]
     [Appearance("HideDelete", AppearanceItemType = "Action", TargetItems = "Delete", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideORDRAddItem", AppearanceItemType = "Action", TargetItems = "AddItem", Criteria = "IsNew", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     public class OGW10ORDR : XPObject
     { 
         public OGW10ORDR(Session session)
@@ -33,7 +34,7 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
             CreateDate = DateTime.Now;
             SalesOrderDate = DateTime.Today;
 
-            ObjType = "OGW10ORDR";
+            ObjType = Session.FindObject<vwObjType>(CriteriaOperator.Parse("Code = 'OGW10ORDR'"));
             Status = Session.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'DRAFT'"));
         }
 
@@ -96,11 +97,12 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
             }
         }
 
-        private string _ObjType;
+        private vwObjType _ObjType;
+        [NoForeignKey]
         [Index(1), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
         [XafDisplayName("ObjType")]
         [Appearance("ObjType", Enabled = false)]
-        public string ObjType
+        public vwObjType ObjType
         {
             get { return _ObjType; }
             set
@@ -1158,6 +1160,7 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
 
         [Association("OGW10ORDR-OGW11ORDR")]
         [XafDisplayName("Items")]
+        [Appearance("OGW11ORDR", Enabled = false, Criteria = "IsNew")]
         public XPCollection<OGW11ORDR> OGW11ORDR
         {
             get { return GetCollection<OGW11ORDR>("OGW11ORDR"); }
@@ -1165,6 +1168,7 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
 
         [Association("OGW10ORDR-OGW12ORDR")]
         [XafDisplayName("Payment")]
+        [Appearance("OGW12ORDR", Enabled = false, Criteria = "IsNew")]
         public XPCollection<OGW12ORDR> OGW12ORDR
         {
             get { return GetCollection<OGW12ORDR>("OGW12ORDR"); }

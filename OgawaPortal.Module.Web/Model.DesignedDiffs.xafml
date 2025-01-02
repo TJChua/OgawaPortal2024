@@ -5,13 +5,16 @@
 	  <Item Id="Default" Index="0" />
       <Item Id="System Initialization" Index="1">
         <Items>
-          <Item Id="OGW10SLYT_ListView" Index="0" />
-          <Item Id="Country_ListView" Index="1" />
+          <Item Id="OGW10NNM1_ListView" Index="0" />
+          <Item Id="OGW10SLYT_ListView" Index="1" />
+          <Item Id="Country_ListView" Index="2" />
+          <Item Id="District_ListView" Index="3" />
+          <Item Id="Races_ListView" Index="4" />
         </Items>
       </Item>
       <Item Id="Maintenance" Index="2" />
       <Item Id="POS - Sales" Index="3" />
-	  <Item Id="SAP" Index="4" />	
+      <Item Id="SAP" Index="4" />
     </Items>
   </NavigationItems>
   <Options CollectionsEditMode="Edit" />
@@ -30,6 +33,66 @@
         <StaticImage Id="LogonImage" ImageName="Security" HorizontalAlign="Center" />
       </Items>
     </DetailView>
+    <ListView Id="CancelType_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="CardIssuer_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="CardMachineBank_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="CardType_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="CloseType_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="Consignment_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="Country_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="DiscountControl_ListView">
+      <Columns>
+        <ColumnInfo Id="ButtonDescription" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="DiscountType_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="District_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="ExchangeType_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="Instalment_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
     <DetailView Id="ItemBrowser_DetailView">
       <Items>
         <ActionContainerViewItem Id="BrowseAction" ActionContainer="ListView" Caption="BrowseAction" IsNewNode="True" />
@@ -71,6 +134,11 @@
     </ListView>
     <DetailView Id="ItemCarts_DetailView" AllowEdit="False" />
     <DetailView Id="ItemCodes_DetailView" AllowEdit="False" />
+    <ListView Id="OGW10NNM1_ListView">
+      <Columns>
+        <ColumnInfo Id="SeriesName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
     <DetailView Id="OGW10ORDR_DetailView">
       <Items>
         <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
@@ -265,6 +333,11 @@
         <ColumnInfo Id="CardHolderName" SortIndex="-1" SortOrder="None" />
       </Columns>
     </ListView>
+    <ListView Id="OGW10SLYT_ListView">
+      <Columns>
+        <ColumnInfo Id="Name" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
     <DetailView Id="OGW12ORDR_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -325,6 +398,26 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="PaymentMethod_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="Races_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="Transporter_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="Voucher_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
     <DetailView Id="vwItemMasters_DetailView" AllowEdit="False" />
     <DetailView Id="vwObjType_DetailView" AllowEdit="False" />
     <DetailView Id="vwOutlets_DetailView" AllowEdit="False" />

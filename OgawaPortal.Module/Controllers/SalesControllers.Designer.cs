@@ -29,8 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.DeleteORDRLine = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            // 
+            // DeleteORDRLine
+            // 
+            this.DeleteORDRLine.Caption = "Delete";
+            this.DeleteORDRLine.Category = "Edit";
+            this.DeleteORDRLine.ConfirmationMessage = "Are you sure want to proceed?";
+            this.DeleteORDRLine.Id = "DeleteORDRLine";
+            this.DeleteORDRLine.ImageName = "Action_Delete";
+            this.DeleteORDRLine.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireMultipleObjects;
+            this.DeleteORDRLine.ToolTip = null;
+            this.DeleteORDRLine.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.DeleteORDRLine_Execute);
+            // 
+            // SalesControllers
+            // 
+            this.Actions.Add(this.DeleteORDRLine);
+
         }
 
         #endregion
+
+        private DevExpress.ExpressApp.Actions.SimpleAction DeleteORDRLine;
     }
 }

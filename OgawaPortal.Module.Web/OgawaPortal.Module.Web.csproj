@@ -38,6 +38,8 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="DevExpress.Data.v22.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -130,6 +132,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\WebCustomizeLayoutController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\WebCustomizeLayoutController.Designer.cs">
+      <DependentUpon>WebCustomizeLayoutController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\WebModifyController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\WebModifyController.Designer.cs">
+      <DependentUpon>WebModifyController.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebModule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -139,6 +153,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\WebCustomizeLayoutController.resx">
+      <DependentUpon>WebCustomizeLayoutController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>

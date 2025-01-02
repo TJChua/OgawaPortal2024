@@ -132,7 +132,9 @@
     <Compile Include="BusinessObjects\Maintenance\ExchangeType.cs" />
     <Compile Include="BusinessObjects\Maintenance\GSTDates.cs" />
     <Compile Include="BusinessObjects\Maintenance\Instalment.cs" />
+    <Compile Include="BusinessObjects\Maintenance\OGW10NNM1.cs" />
     <Compile Include="BusinessObjects\Maintenance\OGW10SLYT.cs" />
+    <Compile Include="BusinessObjects\Maintenance\OGW11NNM1.cs" />
     <Compile Include="BusinessObjects\Maintenance\PaymentMethod.cs" />
     <Compile Include="BusinessObjects\Maintenance\Races.cs" />
     <Compile Include="BusinessObjects\Maintenance\Translate.cs" />
@@ -192,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\NonpersistentControllers.resx">
       <DependentUpon>NonpersistentControllers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\SalesControllers.resx">
+      <DependentUpon>SalesControllers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Properties\licenses.licx" />

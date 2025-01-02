@@ -46,7 +46,7 @@
             // 
             this.ClearCart.Caption = "Clear Cart";
             this.ClearCart.Category = "ListView";
-            this.ClearCart.ConfirmationMessage = "Are you sure you want to clear the cart?";
+            this.ClearCart.ConfirmationMessage = "Are you sure want to clear the cart?";
             this.ClearCart.Id = "ClearCart";
             this.ClearCart.ToolTip = null;
             this.ClearCart.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.ClearCart_Execute);

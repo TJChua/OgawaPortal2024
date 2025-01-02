@@ -2,6 +2,9 @@
 using DevExpress.ExpressApp.Editors;
 using DevExpress.Web;
 using DevExpress.Xpo.DB.Helpers;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace OgawaPortal.Module.Controllers
 {
@@ -67,6 +70,42 @@ namespace OgawaPortal.Module.Controllers
             {
                 gridView.Selection.UnselectAll();
             }
+        }
+
+        public void executeNonQuery(string query)
+        {
+            #region Connect to xaf DB
+
+            string PopUpMsg = "";
+            string connectionString = getConnectionString();
+
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            #endregion
+
+            #region ExecuteNonQuery
+            try
+            {
+                conn.Open();
+
+                SqlCommand cmdsql = new SqlCommand(query, conn);
+                cmdsql.CommandTimeout = 0;
+                cmdsql.ExecuteNonQuery();
+                cmdsql.Dispose();
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                PopUpMsg = ex.Message;
+                showMsg("Error", PopUpMsg, InformationType.Error);
+                conn.Close();
+            }
+            #endregion
         }
     }
 }

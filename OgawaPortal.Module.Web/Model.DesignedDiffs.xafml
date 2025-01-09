@@ -2,7 +2,7 @@
 <Application Logo="Logo" Title="Ogawa Portal">
   <NavigationItems>
     <Items>
-	  <Item Id="Default" Index="0" />
+      <Item Id="Default" Index="0" />
       <Item Id="System Initialization" Index="1">
         <Items>
           <Item Id="OGW10NNM1_ListView" Index="0" />
@@ -13,7 +13,13 @@
         </Items>
       </Item>
       <Item Id="Maintenance" Index="2" />
-      <Item Id="POS - Sales" Index="3" />
+      <Item Id="POS - Sales" Index="3">
+        <Items>
+          <Item Id="OGW10ORDR_ListView" Index="0" />
+          <Item Id="Resume Order" ViewId="OGW10ORDR_ListView_RsmOrder" Index="1" IsNewNode="True" />
+          <Item Id="POS Sales Edit Order" ViewId="OGW10ORDR_ListView_EditOrder" Index="2" IsNewNode="True" />
+        </Items>
+      </Item>
       <Item Id="SAP" Index="4" />
     </Items>
   </NavigationItems>
@@ -61,6 +67,17 @@
     <ListView Id="Consignment_ListView">
       <Columns>
         <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <DetailView Id="CopyList_OGW11ORDR_DetailView" AllowEdit="False" />
+    <ListView Id="CopyList_OGW11ORDR_LookupListView" ShowAutoFilterRow="False">
+      <Columns>
+        <ColumnInfo Id="Header" Index="-1" />
+        <ColumnInfo Id="Header.DocNum" PropertyName="Header.DocNum" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Header.SalesOrderDate" PropertyName="Header.SalesOrderDate" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Header.SalesRefNo" PropertyName="Header.SalesRefNo" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Header.Reason" PropertyName="Header.Reason" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Header.Status" PropertyName="Header.Status" Index="4" IsNewNode="True" />
       </Columns>
     </ListView>
     <ListView Id="Country_ListView">
@@ -322,7 +339,700 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <DetailView Id="OGW10ORDR_DetailView_EditOrder" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="OgawaPortal.Module.BusinessObjects.Sales_Order.OGW10ORDR" Caption="Edit Order" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Address1" PropertyName="Address1" IsNewNode="True" />
+        <PropertyEditor Id="Address2" PropertyName="Address2" IsNewNode="True" />
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="OGW10ORDR_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="BaseNum" PropertyName="BaseNum" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress1" PropertyName="BillAddress1" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress2" PropertyName="BillAddress2" IsNewNode="True" />
+        <PropertyEditor Id="BillCity" PropertyName="BillCity" IsNewNode="True" />
+        <PropertyEditor Id="BillCountry" PropertyName="BillCountry" IsNewNode="True" />
+        <PropertyEditor Id="BillDistrict" PropertyName="BillDistrict" IsNewNode="True" />
+        <PropertyEditor Id="BillEmail" PropertyName="BillEmail" IsNewNode="True" />
+        <PropertyEditor Id="BillHomePhone" PropertyName="BillHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillIdentityNo" PropertyName="BillIdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="BillMobilePhone" PropertyName="BillMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillName" PropertyName="BillName" IsNewNode="True" />
+        <PropertyEditor Id="BillPostCode" PropertyName="BillPostCode" IsNewNode="True" />
+        <PropertyEditor Id="BillRace" PropertyName="BillRace" IsNewNode="True" />
+        <PropertyEditor Id="CancelType" PropertyName="CancelType" IsNewNode="True" />
+        <PropertyEditor Id="Cash" PropertyName="Cash" IsNewNode="True" />
+        <PropertyEditor Id="City" PropertyName="City" IsNewNode="True" />
+        <PropertyEditor Id="CloseType" PropertyName="CloseType" IsNewNode="True" />
+        <PropertyEditor Id="Country" PropertyName="Country" IsNewNode="True" />
+        <PropertyEditor Id="CreateDate" PropertyName="CreateDate" IsNewNode="True" />
+        <PropertyEditor Id="CreateUser" PropertyName="CreateUser" IsNewNode="True" />
+        <PropertyEditor Id="CreditCard" PropertyName="CreditCard" IsNewNode="True" />
+        <PropertyEditor Id="CreditNote" PropertyName="CreditNote" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress1" PropertyName="DeliveryAddress1" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress2" PropertyName="DeliveryAddress2" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCity" PropertyName="DeliveryCity" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryContact" PropertyName="DeliveryContact" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCountry" PropertyName="DeliveryCountry" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryDistrict" PropertyName="DeliveryDistrict" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPostCode" PropertyName="DeliveryPostCode" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryRace" PropertyName="DeliveryRace" IsNewNode="True" />
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+        <PropertyEditor Id="District" PropertyName="District" IsNewNode="True" />
+        <PropertyEditor Id="DocNum" PropertyName="DocNum" IsNewNode="True" />
+        <PropertyEditor Id="EditAndCancel" PropertyName="EditAndCancel" IsNewNode="True" />
+        <PropertyEditor Id="Email" PropertyName="Email" IsNewNode="True" />
+        <PropertyEditor Id="HomePhone" PropertyName="HomePhone" IsNewNode="True" />
+        <PropertyEditor Id="IdentityNo" PropertyName="IdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="MinDueBalance" PropertyName="MinDueBalance" IsNewNode="True" />
+        <PropertyEditor Id="MinimumDue" PropertyName="MinimumDue" IsNewNode="True" />
+        <PropertyEditor Id="MobilePhone" PropertyName="MobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="Name" PropertyName="Name" IsNewNode="True" />
+        <PropertyEditor Id="NetTotalDue" PropertyName="NetTotalDue" IsNewNode="True" />
+        <PropertyEditor Id="ObjType" PropertyName="ObjType" IsNewNode="True" />
+        <PropertyEditor Id="OGW11ORDR" PropertyName="OGW11ORDR" View="OGW10ORDR_OGW11ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW12ORDR" PropertyName="OGW12ORDR" View="OGW10ORDR_OGW12ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW15ORDR" PropertyName="OGW15ORDR" View="OGW10ORDR_OGW15ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="OrderBalanceDue" PropertyName="OrderBalanceDue" IsNewNode="True" />
+        <PropertyEditor Id="OrderDiscount" PropertyName="OrderDiscount" IsNewNode="True" />
+        <PropertyEditor Id="PostCode" PropertyName="PostCode" IsNewNode="True" />
+        <PropertyEditor Id="PreviousPayment" PropertyName="PreviousPayment" IsNewNode="True" />
+        <PropertyEditor Id="Race" PropertyName="Race" IsNewNode="True" />
+        <PropertyEditor Id="Reason" PropertyName="Reason" IsNewNode="True" />
+        <PropertyEditor Id="Remarks" PropertyName="Remarks" IsNewNode="True" />
+        <PropertyEditor Id="ResumeOrder" PropertyName="ResumeOrder" IsNewNode="True" />
+        <PropertyEditor Id="SalesOrderDate" PropertyName="SalesOrderDate" IsNewNode="True" />
+        <PropertyEditor Id="SalesRefNo" PropertyName="SalesRefNo" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep1" PropertyName="SalesRep1" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep2" PropertyName="SalesRep2" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep3" PropertyName="SalesRep3" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep4" PropertyName="SalesRep4" IsNewNode="True" />
+        <PropertyEditor Id="SettlementDiscount" PropertyName="SettlementDiscount" IsNewNode="True" />
+        <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
+        <PropertyEditor Id="SubmitBy" PropertyName="SubmitBy" IsNewNode="True" />
+        <PropertyEditor Id="SubmitDate" PropertyName="SubmitDate" IsNewNode="True" />
+        <PropertyEditor Id="SubTotal" PropertyName="SubTotal" IsNewNode="True" />
+        <PropertyEditor Id="Tax" PropertyName="Tax" IsNewNode="True" />
+        <PropertyEditor Id="TotalDue" PropertyName="TotalDue" IsNewNode="True" />
+        <PropertyEditor Id="TotalPayment" PropertyName="TotalPayment" IsNewNode="True" />
+        <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Voucher" PropertyName="Voucher" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="18.263473053892216" IsNewNode="True">
+            <LayoutGroup Id="OGW10ORDR_col1" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Autod92190b4-c42b-49e7-b467-ce6fd752c81c" ShowCaption="False" Caption="Autod92190b4-c42b-49e7-b467-ce6fd752c81c(4)" Index="0" RelativeSize="42.149929278642148" IsNewNode="True">
+                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+                <LayoutItem Id="SalesOrderDate" ViewItem="SalesOrderDate" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+                <LayoutItem Id="SalesRefNo" ViewItem="SalesRefNo" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+                <LayoutItem Id="Remarks" ViewItem="Remarks" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto25e949ff-07b4-4006-9ea8-1ba3ed4bf48b" ShowCaption="False" Caption="Auto25e949ff-07b4-4006-9ea8-1ba3ed4bf48b(9)" Index="1" RelativeSize="57.850070721357852" Direction="Horizontal" IsNewNode="True">
+                <LayoutGroup Id="Auto5adb6d9f-c413-40b9-a8df-8523befeb6d6" ShowCaption="False" Caption="Auto5adb6d9f-c413-40b9-a8df-8523befeb6d6(10)" Index="0" RelativeSize="68.7041564792176" IsNewNode="True">
+                  <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+                  <LayoutItem Id="CancelType" ViewItem="CancelType" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+                  <LayoutItem Id="CloseType" ViewItem="CloseType" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+                  <LayoutItem Id="Reason" ViewItem="Reason" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="31.295843520782395" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="55.688622754491021" IsNewNode="True">
+            <LayoutGroup Id="OGW11ORDR" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW11ORDR" ViewItem="OGW11ORDR" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="1" Caption="Customer Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Name" ViewItem="Name" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="Address1" ViewItem="Address1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Address2" ViewItem="Address2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="City" ViewItem="City" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="District" ViewItem="District" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="PostCode" ViewItem="PostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Country" ViewItem="Country" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="MobilePhone" ViewItem="MobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="HomePhone" ViewItem="HomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Email" ViewItem="Email" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="IdentityNo" ViewItem="IdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Race" ViewItem="Race" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="2" Caption="Billing Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="BillName" ViewItem="BillName" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="BillAddress1" ViewItem="BillAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillAddress2" ViewItem="BillAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCity" ViewItem="BillCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillDistrict" ViewItem="BillDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillPostCode" ViewItem="BillPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCountry" ViewItem="BillCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillMobilePhone" ViewItem="BillMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillHomePhone" ViewItem="BillHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillEmail" ViewItem="BillEmail" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillIdentityNo" ViewItem="BillIdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillRace" ViewItem="BillRace" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="3" Caption="Delivery Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="26.506024096385541" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item4" ShowCaption="True" CaptionLocation="Top" Index="4" Caption="Sales Rep" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="SalesRep1" ViewItem="SalesRep1" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="SalesRep2" ViewItem="SalesRep2" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="SalesRep3" ViewItem="SalesRep3" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="SalesRep4" ViewItem="SalesRep4" Index="3" RelativeSize="73.493975903614455" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW12ORDR" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW12ORDR" ViewItem="OGW12ORDR" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" Index="6" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="Auto6314d472-8e3a-4aa2-83c0-85c83a6e1ddb" ShowCaption="False" Caption="Auto6314d472-8e3a-4aa2-83c0-85c83a6e1ddb(65)" Direction="Horizontal" Index="2" RelativeSize="26.047904191616766" IsNewNode="True">
+            <LayoutGroup Id="Auto3fd32d2e-e6d7-452e-b6db-3e0b98a45ae2" ShowCaption="False" Caption="Auto3fd32d2e-e6d7-452e-b6db-3e0b98a45ae2(66)" Index="0" RelativeSize="49.646393210749643" IsNewNode="True">
+              <LayoutItem Id="Cash" ViewItem="Cash" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="CreditCard" ViewItem="CreditCard" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Voucher" ViewItem="Voucher" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="CreditNote" ViewItem="CreditNote" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autob01d55d4-d3f3-462c-bdf0-bbb9f4d00a0a" ShowCaption="False" Caption="Autob01d55d4-d3f3-462c-bdf0-bbb9f4d00a0a(73)" Index="1" RelativeSize="50.353606789250357" IsNewNode="True">
+              <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Tax" ViewItem="Tax" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OGW10ORDR_DetailView_RsmOrder" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="OgawaPortal.Module.BusinessObjects.Sales_Order.OGW10ORDR" Caption="Resume Order" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Address1" PropertyName="Address1" IsNewNode="True" />
+        <PropertyEditor Id="Address2" PropertyName="Address2" IsNewNode="True" />
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="OGW10ORDR_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="BaseNum" PropertyName="BaseNum" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress1" PropertyName="BillAddress1" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress2" PropertyName="BillAddress2" IsNewNode="True" />
+        <PropertyEditor Id="BillCity" PropertyName="BillCity" IsNewNode="True" />
+        <PropertyEditor Id="BillCountry" PropertyName="BillCountry" IsNewNode="True" />
+        <PropertyEditor Id="BillDistrict" PropertyName="BillDistrict" IsNewNode="True" />
+        <PropertyEditor Id="BillEmail" PropertyName="BillEmail" IsNewNode="True" />
+        <PropertyEditor Id="BillHomePhone" PropertyName="BillHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillIdentityNo" PropertyName="BillIdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="BillMobilePhone" PropertyName="BillMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillName" PropertyName="BillName" IsNewNode="True" />
+        <PropertyEditor Id="BillPostCode" PropertyName="BillPostCode" IsNewNode="True" />
+        <PropertyEditor Id="BillRace" PropertyName="BillRace" IsNewNode="True" />
+        <PropertyEditor Id="CancelType" PropertyName="CancelType" IsNewNode="True" />
+        <PropertyEditor Id="Cash" PropertyName="Cash" IsNewNode="True" />
+        <PropertyEditor Id="City" PropertyName="City" IsNewNode="True" />
+        <PropertyEditor Id="CloseType" PropertyName="CloseType" IsNewNode="True" />
+        <PropertyEditor Id="Country" PropertyName="Country" IsNewNode="True" />
+        <PropertyEditor Id="CreateDate" PropertyName="CreateDate" IsNewNode="True" />
+        <PropertyEditor Id="CreateUser" PropertyName="CreateUser" IsNewNode="True" />
+        <PropertyEditor Id="CreditCard" PropertyName="CreditCard" IsNewNode="True" />
+        <PropertyEditor Id="CreditNote" PropertyName="CreditNote" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress1" PropertyName="DeliveryAddress1" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress2" PropertyName="DeliveryAddress2" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCity" PropertyName="DeliveryCity" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryContact" PropertyName="DeliveryContact" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCountry" PropertyName="DeliveryCountry" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryDistrict" PropertyName="DeliveryDistrict" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPostCode" PropertyName="DeliveryPostCode" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryRace" PropertyName="DeliveryRace" IsNewNode="True" />
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+        <PropertyEditor Id="District" PropertyName="District" IsNewNode="True" />
+        <PropertyEditor Id="DocNum" PropertyName="DocNum" IsNewNode="True" />
+        <PropertyEditor Id="EditAndCancel" PropertyName="EditAndCancel" IsNewNode="True" />
+        <PropertyEditor Id="Email" PropertyName="Email" IsNewNode="True" />
+        <PropertyEditor Id="HomePhone" PropertyName="HomePhone" IsNewNode="True" />
+        <PropertyEditor Id="IdentityNo" PropertyName="IdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="MinDueBalance" PropertyName="MinDueBalance" IsNewNode="True" />
+        <PropertyEditor Id="MinimumDue" PropertyName="MinimumDue" IsNewNode="True" />
+        <PropertyEditor Id="MobilePhone" PropertyName="MobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="Name" PropertyName="Name" IsNewNode="True" />
+        <PropertyEditor Id="NetTotalDue" PropertyName="NetTotalDue" IsNewNode="True" />
+        <PropertyEditor Id="ObjType" PropertyName="ObjType" IsNewNode="True" />
+        <PropertyEditor Id="OGW11ORDR" PropertyName="OGW11ORDR" View="OGW10ORDR_OGW11ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW12ORDR" PropertyName="OGW12ORDR" View="OGW10ORDR_OGW12ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW15ORDR" PropertyName="OGW15ORDR" View="OGW10ORDR_OGW15ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="OrderBalanceDue" PropertyName="OrderBalanceDue" IsNewNode="True" />
+        <PropertyEditor Id="OrderDiscount" PropertyName="OrderDiscount" IsNewNode="True" />
+        <PropertyEditor Id="PostCode" PropertyName="PostCode" IsNewNode="True" />
+        <PropertyEditor Id="PreviousPayment" PropertyName="PreviousPayment" IsNewNode="True" />
+        <PropertyEditor Id="Race" PropertyName="Race" IsNewNode="True" />
+        <PropertyEditor Id="Reason" PropertyName="Reason" IsNewNode="True" />
+        <PropertyEditor Id="Remarks" PropertyName="Remarks" IsNewNode="True" />
+        <PropertyEditor Id="ResumeOrder" PropertyName="ResumeOrder" IsNewNode="True" />
+        <PropertyEditor Id="SalesOrderDate" PropertyName="SalesOrderDate" IsNewNode="True" />
+        <PropertyEditor Id="SalesRefNo" PropertyName="SalesRefNo" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep1" PropertyName="SalesRep1" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep2" PropertyName="SalesRep2" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep3" PropertyName="SalesRep3" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep4" PropertyName="SalesRep4" IsNewNode="True" />
+        <PropertyEditor Id="SettlementDiscount" PropertyName="SettlementDiscount" IsNewNode="True" />
+        <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
+        <PropertyEditor Id="SubmitBy" PropertyName="SubmitBy" IsNewNode="True" />
+        <PropertyEditor Id="SubmitDate" PropertyName="SubmitDate" IsNewNode="True" />
+        <PropertyEditor Id="SubTotal" PropertyName="SubTotal" IsNewNode="True" />
+        <PropertyEditor Id="Tax" PropertyName="Tax" IsNewNode="True" />
+        <PropertyEditor Id="TotalDue" PropertyName="TotalDue" IsNewNode="True" />
+        <PropertyEditor Id="TotalPayment" PropertyName="TotalPayment" IsNewNode="True" />
+        <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Voucher" PropertyName="Voucher" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="18.263473053892216" IsNewNode="True">
+            <LayoutGroup Id="OGW10ORDR_col1" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Autod92190b4-c42b-49e7-b467-ce6fd752c81c" ShowCaption="False" Caption="Autod92190b4-c42b-49e7-b467-ce6fd752c81c(4)" Index="0" RelativeSize="42.149929278642148" IsNewNode="True">
+                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+                <LayoutItem Id="SalesOrderDate" ViewItem="SalesOrderDate" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+                <LayoutItem Id="SalesRefNo" ViewItem="SalesRefNo" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+                <LayoutItem Id="Remarks" ViewItem="Remarks" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto25e949ff-07b4-4006-9ea8-1ba3ed4bf48b" ShowCaption="False" Caption="Auto25e949ff-07b4-4006-9ea8-1ba3ed4bf48b(9)" Index="1" RelativeSize="57.850070721357852" Direction="Horizontal" IsNewNode="True">
+                <LayoutGroup Id="Auto5adb6d9f-c413-40b9-a8df-8523befeb6d6" ShowCaption="False" Caption="Auto5adb6d9f-c413-40b9-a8df-8523befeb6d6(10)" Index="0" RelativeSize="68.7041564792176" IsNewNode="True">
+                  <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+                  <LayoutItem Id="CancelType" ViewItem="CancelType" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+                  <LayoutItem Id="CloseType" ViewItem="CloseType" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+                  <LayoutItem Id="Reason" ViewItem="Reason" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="31.295843520782395" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="55.688622754491021" IsNewNode="True">
+            <LayoutGroup Id="OGW11ORDR" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW11ORDR" ViewItem="OGW11ORDR" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="1" Caption="Customer Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Name" ViewItem="Name" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="Address1" ViewItem="Address1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Address2" ViewItem="Address2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="City" ViewItem="City" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="District" ViewItem="District" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="PostCode" ViewItem="PostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Country" ViewItem="Country" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="MobilePhone" ViewItem="MobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="HomePhone" ViewItem="HomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Email" ViewItem="Email" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="IdentityNo" ViewItem="IdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Race" ViewItem="Race" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="2" Caption="Billing Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="BillName" ViewItem="BillName" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="BillAddress1" ViewItem="BillAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillAddress2" ViewItem="BillAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCity" ViewItem="BillCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillDistrict" ViewItem="BillDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillPostCode" ViewItem="BillPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCountry" ViewItem="BillCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillMobilePhone" ViewItem="BillMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillHomePhone" ViewItem="BillHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillEmail" ViewItem="BillEmail" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillIdentityNo" ViewItem="BillIdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillRace" ViewItem="BillRace" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="3" Caption="Delivery Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="26.506024096385541" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item4" ShowCaption="True" CaptionLocation="Top" Index="4" Caption="Sales Rep" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="SalesRep1" ViewItem="SalesRep1" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="SalesRep2" ViewItem="SalesRep2" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="SalesRep3" ViewItem="SalesRep3" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="SalesRep4" ViewItem="SalesRep4" Index="3" RelativeSize="73.493975903614455" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW12ORDR" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW12ORDR" ViewItem="OGW12ORDR" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" Index="6" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="Auto6314d472-8e3a-4aa2-83c0-85c83a6e1ddb" ShowCaption="False" Caption="Auto6314d472-8e3a-4aa2-83c0-85c83a6e1ddb(65)" Direction="Horizontal" Index="2" RelativeSize="26.047904191616766" IsNewNode="True">
+            <LayoutGroup Id="Auto3fd32d2e-e6d7-452e-b6db-3e0b98a45ae2" ShowCaption="False" Caption="Auto3fd32d2e-e6d7-452e-b6db-3e0b98a45ae2(66)" Index="0" RelativeSize="49.646393210749643" IsNewNode="True">
+              <LayoutItem Id="Cash" ViewItem="Cash" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="CreditCard" ViewItem="CreditCard" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Voucher" ViewItem="Voucher" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="CreditNote" ViewItem="CreditNote" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autob01d55d4-d3f3-462c-bdf0-bbb9f4d00a0a" ShowCaption="False" Caption="Autob01d55d4-d3f3-462c-bdf0-bbb9f4d00a0a(73)" Index="1" RelativeSize="50.353606789250357" IsNewNode="True">
+              <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Tax" ViewItem="Tax" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OGW10ORDR_DetailView_View" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="OgawaPortal.Module.BusinessObjects.Sales_Order.OGW10ORDR" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Address1" PropertyName="Address1" IsNewNode="True" />
+        <PropertyEditor Id="Address2" PropertyName="Address2" IsNewNode="True" />
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="OGW10ORDR_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="BaseNum" PropertyName="BaseNum" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress1" PropertyName="BillAddress1" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress2" PropertyName="BillAddress2" IsNewNode="True" />
+        <PropertyEditor Id="BillCity" PropertyName="BillCity" IsNewNode="True" />
+        <PropertyEditor Id="BillCountry" PropertyName="BillCountry" IsNewNode="True" />
+        <PropertyEditor Id="BillDistrict" PropertyName="BillDistrict" IsNewNode="True" />
+        <PropertyEditor Id="BillEmail" PropertyName="BillEmail" IsNewNode="True" />
+        <PropertyEditor Id="BillHomePhone" PropertyName="BillHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillIdentityNo" PropertyName="BillIdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="BillMobilePhone" PropertyName="BillMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillName" PropertyName="BillName" IsNewNode="True" />
+        <PropertyEditor Id="BillPostCode" PropertyName="BillPostCode" IsNewNode="True" />
+        <PropertyEditor Id="BillRace" PropertyName="BillRace" IsNewNode="True" />
+        <PropertyEditor Id="CancelType" PropertyName="CancelType" IsNewNode="True" />
+        <PropertyEditor Id="Cash" PropertyName="Cash" IsNewNode="True" />
+        <PropertyEditor Id="City" PropertyName="City" IsNewNode="True" />
+        <PropertyEditor Id="CloseType" PropertyName="CloseType" IsNewNode="True" />
+        <PropertyEditor Id="Country" PropertyName="Country" IsNewNode="True" />
+        <PropertyEditor Id="CreateDate" PropertyName="CreateDate" IsNewNode="True" />
+        <PropertyEditor Id="CreateUser" PropertyName="CreateUser" IsNewNode="True" />
+        <PropertyEditor Id="CreditCard" PropertyName="CreditCard" IsNewNode="True" />
+        <PropertyEditor Id="CreditNote" PropertyName="CreditNote" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress1" PropertyName="DeliveryAddress1" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress2" PropertyName="DeliveryAddress2" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCity" PropertyName="DeliveryCity" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryContact" PropertyName="DeliveryContact" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCountry" PropertyName="DeliveryCountry" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryDistrict" PropertyName="DeliveryDistrict" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPostCode" PropertyName="DeliveryPostCode" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryRace" PropertyName="DeliveryRace" IsNewNode="True" />
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+        <PropertyEditor Id="District" PropertyName="District" IsNewNode="True" />
+        <PropertyEditor Id="DocNum" PropertyName="DocNum" IsNewNode="True" />
+        <PropertyEditor Id="EditAndCancel" PropertyName="EditAndCancel" IsNewNode="True" />
+        <PropertyEditor Id="Email" PropertyName="Email" IsNewNode="True" />
+        <PropertyEditor Id="HomePhone" PropertyName="HomePhone" IsNewNode="True" />
+        <PropertyEditor Id="IdentityNo" PropertyName="IdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="MinDueBalance" PropertyName="MinDueBalance" IsNewNode="True" />
+        <PropertyEditor Id="MinimumDue" PropertyName="MinimumDue" IsNewNode="True" />
+        <PropertyEditor Id="MobilePhone" PropertyName="MobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="Name" PropertyName="Name" IsNewNode="True" />
+        <PropertyEditor Id="NetTotalDue" PropertyName="NetTotalDue" IsNewNode="True" />
+        <PropertyEditor Id="ObjType" PropertyName="ObjType" IsNewNode="True" />
+        <PropertyEditor Id="OGW11ORDR" PropertyName="OGW11ORDR" View="OGW10ORDR_OGW11ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW12ORDR" PropertyName="OGW12ORDR" View="OGW10ORDR_OGW12ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW15ORDR" PropertyName="OGW15ORDR" View="OGW10ORDR_OGW15ORDR_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="OrderBalanceDue" PropertyName="OrderBalanceDue" IsNewNode="True" />
+        <PropertyEditor Id="OrderDiscount" PropertyName="OrderDiscount" IsNewNode="True" />
+        <PropertyEditor Id="PostCode" PropertyName="PostCode" IsNewNode="True" />
+        <PropertyEditor Id="PreviousPayment" PropertyName="PreviousPayment" IsNewNode="True" />
+        <PropertyEditor Id="Race" PropertyName="Race" IsNewNode="True" />
+        <PropertyEditor Id="Reason" PropertyName="Reason" IsNewNode="True" />
+        <PropertyEditor Id="Remarks" PropertyName="Remarks" IsNewNode="True" />
+        <PropertyEditor Id="ResumeOrder" PropertyName="ResumeOrder" IsNewNode="True" />
+        <PropertyEditor Id="SalesOrderDate" PropertyName="SalesOrderDate" IsNewNode="True" />
+        <PropertyEditor Id="SalesRefNo" PropertyName="SalesRefNo" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep1" PropertyName="SalesRep1" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep2" PropertyName="SalesRep2" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep3" PropertyName="SalesRep3" IsNewNode="True" />
+        <PropertyEditor Id="SalesRep4" PropertyName="SalesRep4" IsNewNode="True" />
+        <PropertyEditor Id="SettlementDiscount" PropertyName="SettlementDiscount" IsNewNode="True" />
+        <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
+        <PropertyEditor Id="SubmitBy" PropertyName="SubmitBy" IsNewNode="True" />
+        <PropertyEditor Id="SubmitDate" PropertyName="SubmitDate" IsNewNode="True" />
+        <PropertyEditor Id="SubTotal" PropertyName="SubTotal" IsNewNode="True" />
+        <PropertyEditor Id="Tax" PropertyName="Tax" IsNewNode="True" />
+        <PropertyEditor Id="TotalDue" PropertyName="TotalDue" IsNewNode="True" />
+        <PropertyEditor Id="TotalPayment" PropertyName="TotalPayment" IsNewNode="True" />
+        <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Voucher" PropertyName="Voucher" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="18.263473053892216" IsNewNode="True">
+            <LayoutGroup Id="OGW10ORDR_col1" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Autod92190b4-c42b-49e7-b467-ce6fd752c81c" ShowCaption="False" Caption="Autod92190b4-c42b-49e7-b467-ce6fd752c81c(4)" Index="0" RelativeSize="42.149929278642148" IsNewNode="True">
+                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+                <LayoutItem Id="SalesOrderDate" ViewItem="SalesOrderDate" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+                <LayoutItem Id="SalesRefNo" ViewItem="SalesRefNo" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+                <LayoutItem Id="Remarks" ViewItem="Remarks" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto25e949ff-07b4-4006-9ea8-1ba3ed4bf48b" ShowCaption="False" Caption="Auto25e949ff-07b4-4006-9ea8-1ba3ed4bf48b(9)" Index="1" RelativeSize="57.850070721357852" Direction="Horizontal" IsNewNode="True">
+                <LayoutGroup Id="Auto5adb6d9f-c413-40b9-a8df-8523befeb6d6" ShowCaption="False" Caption="Auto5adb6d9f-c413-40b9-a8df-8523befeb6d6(10)" Index="0" RelativeSize="68.7041564792176" IsNewNode="True">
+                  <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+                  <LayoutItem Id="CancelType" ViewItem="CancelType" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+                  <LayoutItem Id="CloseType" ViewItem="CloseType" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+                  <LayoutItem Id="Reason" ViewItem="Reason" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="31.295843520782395" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="55.688622754491021" IsNewNode="True">
+            <LayoutGroup Id="OGW11ORDR" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW11ORDR" ViewItem="OGW11ORDR" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="1" Caption="Customer Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Name" ViewItem="Name" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="Address1" ViewItem="Address1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Address2" ViewItem="Address2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="City" ViewItem="City" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="District" ViewItem="District" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="PostCode" ViewItem="PostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Country" ViewItem="Country" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="MobilePhone" ViewItem="MobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="HomePhone" ViewItem="HomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Email" ViewItem="Email" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="IdentityNo" ViewItem="IdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="Race" ViewItem="Race" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="2" Caption="Billing Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="BillName" ViewItem="BillName" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="BillAddress1" ViewItem="BillAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillAddress2" ViewItem="BillAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCity" ViewItem="BillCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillDistrict" ViewItem="BillDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillPostCode" ViewItem="BillPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCountry" ViewItem="BillCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillMobilePhone" ViewItem="BillMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillHomePhone" ViewItem="BillHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillEmail" ViewItem="BillEmail" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillIdentityNo" ViewItem="BillIdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillRace" ViewItem="BillRace" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="3" Caption="Delivery Info" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="26.506024096385541" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item4" ShowCaption="True" CaptionLocation="Top" Index="4" Caption="Sales Rep" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="SalesRep1" ViewItem="SalesRep1" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="SalesRep2" ViewItem="SalesRep2" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="SalesRep3" ViewItem="SalesRep3" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="SalesRep4" ViewItem="SalesRep4" Index="3" RelativeSize="73.493975903614455" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW12ORDR" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW12ORDR" ViewItem="OGW12ORDR" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" Index="6" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="Auto6314d472-8e3a-4aa2-83c0-85c83a6e1ddb" ShowCaption="False" Caption="Auto6314d472-8e3a-4aa2-83c0-85c83a6e1ddb(65)" Direction="Horizontal" Index="2" RelativeSize="26.047904191616766" IsNewNode="True">
+            <LayoutGroup Id="Auto3fd32d2e-e6d7-452e-b6db-3e0b98a45ae2" ShowCaption="False" Caption="Auto3fd32d2e-e6d7-452e-b6db-3e0b98a45ae2(66)" Index="0" RelativeSize="49.646393210749643" IsNewNode="True">
+              <LayoutItem Id="Cash" ViewItem="Cash" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="CreditCard" ViewItem="CreditCard" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Voucher" ViewItem="Voucher" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="CreditNote" ViewItem="CreditNote" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autob01d55d4-d3f3-462c-bdf0-bbb9f4d00a0a" ShowCaption="False" Caption="Autob01d55d4-d3f3-462c-bdf0-bbb9f4d00a0a(73)" Index="1" RelativeSize="50.353606789250357" IsNewNode="True">
+              <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Tax" ViewItem="Tax" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="OGW10ORDR_ListView" DataAccessMode="DataView" />
+    <ListView Id="OGW10ORDR_ListView_EditOrder" ClassName="OgawaPortal.Module.BusinessObjects.Sales_Order.OGW10ORDR" DataAccessMode="DataView" DetailViewID="OGW10ORDR_DetailView_EditOrder" MasterDetailView="OGW10ORDR_DetailView" Caption="Edit Order" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Address1" PropertyName="Address1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Address2" PropertyName="Address2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BaseNum" PropertyName="BaseNum" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillAddress1" PropertyName="BillAddress1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillAddress2" PropertyName="BillAddress2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillCity" PropertyName="BillCity" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillCountry" PropertyName="BillCountry" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillDistrict" PropertyName="BillDistrict" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillEmail" PropertyName="BillEmail" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillHomePhone" PropertyName="BillHomePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillIdentityNo" PropertyName="BillIdentityNo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillMobilePhone" PropertyName="BillMobilePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillName" PropertyName="BillName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillPostCode" PropertyName="BillPostCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillRace" PropertyName="BillRace" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CancelType" PropertyName="CancelType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Cash" PropertyName="Cash" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="City" PropertyName="City" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CloseType" PropertyName="CloseType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Country" PropertyName="Country" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateDate" PropertyName="CreateDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateUser" PropertyName="CreateUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreditCard" PropertyName="CreditCard" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreditNote" PropertyName="CreditNote" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryAddress1" PropertyName="DeliveryAddress1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryAddress2" PropertyName="DeliveryAddress2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryCity" PropertyName="DeliveryCity" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryContact" PropertyName="DeliveryContact" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryCountry" PropertyName="DeliveryCountry" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryDistrict" PropertyName="DeliveryDistrict" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryPostCode" PropertyName="DeliveryPostCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryRace" PropertyName="DeliveryRace" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="District" PropertyName="District" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EditAndCancel" PropertyName="EditAndCancel" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Email" PropertyName="Email" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="HomePhone" PropertyName="HomePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IdentityNo" PropertyName="IdentityNo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinDueBalance" PropertyName="MinDueBalance" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinimumDue" PropertyName="MinimumDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MobilePhone" PropertyName="MobilePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="NetTotalDue" PropertyName="NetTotalDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjType" PropertyName="ObjType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OrderBalanceDue" PropertyName="OrderBalanceDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OrderDiscount" PropertyName="OrderDiscount" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PostCode" PropertyName="PostCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PreviousPayment" PropertyName="PreviousPayment" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Race" PropertyName="Race" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ResumeOrder" PropertyName="ResumeOrder" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep1" PropertyName="SalesRep1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep2" PropertyName="SalesRep2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep3" PropertyName="SalesRep3" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep4" PropertyName="SalesRep4" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SettlementDiscount" PropertyName="SettlementDiscount" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SubmitBy" PropertyName="SubmitBy" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SubmitDate" PropertyName="SubmitDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SubTotal" PropertyName="SubTotal" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Tax" PropertyName="Tax" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TotalDue" PropertyName="TotalDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TotalPayment" PropertyName="TotalPayment" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateDate" PropertyName="UpdateDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateUser" PropertyName="UpdateUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Voucher" PropertyName="Voucher" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DocNum" PropertyName="DocNum" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="SalesOrderDate" PropertyName="SalesOrderDate" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRefNo" PropertyName="SalesRefNo" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Status" PropertyName="Status" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Reason" PropertyName="Reason" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Remarks" PropertyName="Remarks" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="PostStatus" PropertyName="PostStatus" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ErrorDesc" PropertyName="ErrorDesc" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="OGW10ORDR_ListView_RsmOrder" ClassName="OgawaPortal.Module.BusinessObjects.Sales_Order.OGW10ORDR" DataAccessMode="DataView" Caption="Resume Order" DetailViewID="OGW10ORDR_DetailView_RsmOrder" MasterDetailView="OGW10ORDR_DetailView" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Address1" PropertyName="Address1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Address2" PropertyName="Address2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BaseNum" PropertyName="BaseNum" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillAddress1" PropertyName="BillAddress1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillAddress2" PropertyName="BillAddress2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillCity" PropertyName="BillCity" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillCountry" PropertyName="BillCountry" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillDistrict" PropertyName="BillDistrict" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillEmail" PropertyName="BillEmail" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillHomePhone" PropertyName="BillHomePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillIdentityNo" PropertyName="BillIdentityNo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillMobilePhone" PropertyName="BillMobilePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillName" PropertyName="BillName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillPostCode" PropertyName="BillPostCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BillRace" PropertyName="BillRace" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CancelType" PropertyName="CancelType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Cash" PropertyName="Cash" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="City" PropertyName="City" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CloseType" PropertyName="CloseType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Country" PropertyName="Country" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateDate" PropertyName="CreateDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreateUser" PropertyName="CreateUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreditCard" PropertyName="CreditCard" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreditNote" PropertyName="CreditNote" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryAddress1" PropertyName="DeliveryAddress1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryAddress2" PropertyName="DeliveryAddress2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryCity" PropertyName="DeliveryCity" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryContact" PropertyName="DeliveryContact" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryCountry" PropertyName="DeliveryCountry" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryDistrict" PropertyName="DeliveryDistrict" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryPostCode" PropertyName="DeliveryPostCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryRace" PropertyName="DeliveryRace" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="District" PropertyName="District" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EditAndCancel" PropertyName="EditAndCancel" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Email" PropertyName="Email" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="HomePhone" PropertyName="HomePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IdentityNo" PropertyName="IdentityNo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinDueBalance" PropertyName="MinDueBalance" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinimumDue" PropertyName="MinimumDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MobilePhone" PropertyName="MobilePhone" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="NetTotalDue" PropertyName="NetTotalDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjType" PropertyName="ObjType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OrderBalanceDue" PropertyName="OrderBalanceDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OrderDiscount" PropertyName="OrderDiscount" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PostCode" PropertyName="PostCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PreviousPayment" PropertyName="PreviousPayment" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Race" PropertyName="Race" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ResumeOrder" PropertyName="ResumeOrder" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep1" PropertyName="SalesRep1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep2" PropertyName="SalesRep2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep3" PropertyName="SalesRep3" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRep4" PropertyName="SalesRep4" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SettlementDiscount" PropertyName="SettlementDiscount" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SubmitBy" PropertyName="SubmitBy" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SubmitDate" PropertyName="SubmitDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SubTotal" PropertyName="SubTotal" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Tax" PropertyName="Tax" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TotalDue" PropertyName="TotalDue" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TotalPayment" PropertyName="TotalPayment" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateDate" PropertyName="UpdateDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateUser" PropertyName="UpdateUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Voucher" PropertyName="Voucher" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DocNum" PropertyName="DocNum" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="SalesOrderDate" PropertyName="SalesOrderDate" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="SalesRefNo" PropertyName="SalesRefNo" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Status" PropertyName="Status" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Reason" PropertyName="Reason" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Remarks" PropertyName="Remarks" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="PostStatus" PropertyName="PostStatus" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ErrorDesc" PropertyName="ErrorDesc" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <ListView Id="OGW10ORDR_OGW11ORDR_ListView" InlineEditMode="Batch" AllowEdit="True">
       <Columns>
         <ColumnInfo Id="ItemName" SortIndex="-1" SortOrder="None" />

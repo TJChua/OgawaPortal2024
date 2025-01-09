@@ -454,6 +454,30 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
             }
         }
 
+        private int? _BaseEntry;
+        [XafDisplayName("Base Entry"), ToolTip("Base Entry")]
+        [Index(991), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        [ModelDefault("DisplayFormat", "{0:d0}")]
+        [Appearance("BaseEntry", Enabled = false)]
+        [DbType("int")]
+        public int? BaseEntry
+        {
+            get { return _BaseEntry; }
+            set { SetPropertyValue("BaseEntry", ref _BaseEntry, value); }
+        }
+
+        private int? _BaseOid;
+        [XafDisplayName("Base Oid"), ToolTip("Base Oid")]
+        [Index(992), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        [ModelDefault("DisplayFormat", "{0:d0}")]
+        [Appearance("BaseOid", Enabled = false)]
+        [DbType("int")]
+        public int? BaseOid
+        {
+            get { return _BaseOid; }
+            set { SetPropertyValue("BaseOid", ref _BaseOid, value); }
+        }
+
         [Browsable(false)]
         public bool IsNew
         {

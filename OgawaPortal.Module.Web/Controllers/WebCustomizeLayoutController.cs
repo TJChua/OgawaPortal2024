@@ -111,10 +111,9 @@ namespace OgawaPortal.Module.Web.Controllers
                     ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
                     OGW10SLYT rpt = e.SelectedChoiceActionItem.Data as OGW10SLYT;
 
-                    if (rpt.FilePath == null || rpt.FilePath == "")
+                    if (string.IsNullOrEmpty(rpt.FilePath))
                     {
-                        genCon.showMsg("Error", "Invalid layout path.", InformationType.Error);
-                        return;
+                        throw new InvalidOperationException("Invalid layout path.");
                     }
 
                     ReportDocument doc = new ReportDocument();
@@ -184,7 +183,7 @@ namespace OgawaPortal.Module.Web.Controllers
             }
             else
             {
-                genCon.showMsg("Error", "No layout selected.", InformationType.Error);
+                throw new InvalidOperationException("No layout selected.");
             }
         }
     }

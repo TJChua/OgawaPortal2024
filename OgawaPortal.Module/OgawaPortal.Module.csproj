@@ -115,6 +115,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Copy Screen\CopyList_OGW11ORDR.cs" />
     <Compile Include="BusinessObjects\GeneralValue.cs" />
     <Compile Include="BusinessObjects\Maintenance\CancelType.cs" />
     <Compile Include="BusinessObjects\Maintenance\CardIssuer.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="BusinessObjects\Maintenance\Translate.cs" />
     <Compile Include="BusinessObjects\Maintenance\Transporter.cs" />
     <Compile Include="BusinessObjects\Maintenance\Voucher.cs" />
+    <Compile Include="BusinessObjects\Nonpersistent\OGW10ChgOutlet.cs" />
     <Compile Include="BusinessObjects\Nonpersistent\OGW10OITMBrowse.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW10ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW11ORDR.cs" />
@@ -165,6 +167,16 @@
     <Compile Include="Controllers\GeneralControllers.Designer.cs">
       <DependentUpon>GeneralControllers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\HideButtonListViewControllers.cs" />
+    <Compile Include="Controllers\HideButtonListViewControllers.Designer.cs">
+      <DependentUpon>HideButtonListViewControllers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NavigationControllers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\NavigationControllers.Designer.cs">
+      <DependentUpon>NavigationControllers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\NonpersistentControllers.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -176,6 +188,12 @@
     </Compile>
     <Compile Include="Controllers\SalesControllers.Designer.cs">
       <DependentUpon>SalesControllers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ScreenFilterControllers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\ScreenFilterControllers.Designer.cs">
+      <DependentUpon>ScreenFilterControllers.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseUpdate\Updater.cs" />
     <Compile Include="BusinessObjects\ApplicationUser.cs" />

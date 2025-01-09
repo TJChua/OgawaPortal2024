@@ -19,8 +19,17 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
     [NavigationItem("POS - Sales")]
     [XafDisplayName("POS Sales")]
     [DefaultProperty("DocNum")]
+    [Appearance("HideNewRsm", AppearanceItemType = "Action", TargetItems = "New", Context = "OGW10ORDR_ListView_RsmOrder", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideNewRsm1", AppearanceItemType = "Action", TargetItems = "New", Context = "OGW10ORDR_DetailView_RsmOrder", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("DisableEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "NOT Status.Code IN ('DRAFT','REOPEN')", Enabled = false, Context = "Any")]
     [Appearance("HideDelete", AppearanceItemType = "Action", TargetItems = "Delete", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("HideORDRAddItem", AppearanceItemType = "Action", TargetItems = "AddItem", Criteria = "IsNew", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideSubmit", AppearanceItemType = "Action", TargetItems = "SubmitDoc", Criteria = "IsNew or NOT Status.Code IN ('DRAFT','REOPEN')", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideCancel", AppearanceItemType = "Action", TargetItems = "CancelDoc", Criteria = "IsNew or Status.Code IN ('CANCEL','CLOSED')", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideClose", AppearanceItemType = "Action", TargetItems = "CloseDoc", Criteria = "IsNew or Status.Code IN ('CANCEL','CLOSED')", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideORDRAddItem", AppearanceItemType = "Action", TargetItems = "AddItem", Criteria = "IsNew or Status.Code != 'DRAFT'", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideORDRCopyFrmSO", AppearanceItemType = "Action", TargetItems = "CopyFrmSO", Criteria = "IsNew or EditAndCancel = 0 or Status.Code != 'DRAFT'", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideORDRRsm", AppearanceItemType = "Action", TargetItems = "ResumeDoc", Criteria = "Status.Code != 'OPEN'", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+
     public class OGW10ORDR : XPObject
     { 
         public OGW10ORDR(Session session)
@@ -36,6 +45,7 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
 
             ObjType = Session.FindObject<vwObjType>(CriteriaOperator.Parse("Code = 'OGW10ORDR'"));
             Status = Session.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'DRAFT'"));
+            PostStatus = Session.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'PN'"));
         }
 
         private string _CreateUser;
@@ -1106,6 +1116,29 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
             }
         }
 
+        private vwStatus _PostStatus;
+        [XafDisplayName("Post Status"), ToolTip("Post Status")]
+        [Index(600), VisibleInListView(true), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Appearance("PostStatus", Enabled = false)]
+        [NoForeignKey]
+        public vwStatus PostStatus
+        {
+            get { return _PostStatus; }
+            set { SetPropertyValue("PostStatus", ref _PostStatus, value); }
+        }
+
+        private string _ErrorDesc;
+        [XafDisplayName("Error Desc."), ToolTip("Error Desc.")]
+        [Index(610), VisibleInDetailView(false), VisibleInListView(true), VisibleInLookupListView(false)]
+        [Appearance("ErrorDesc", Enabled = false)]
+        [Size(SizeAttribute.Unlimited)]
+        [DbType("nvarchar(MAX)")]
+        public string ErrorDesc
+        {
+            get { return _ErrorDesc; }
+            set { SetPropertyValue("ErrorDesc", ref _ErrorDesc, value); }
+        }
+
         private bool _EditAndCancel;
         [Appearance("EditAndCancel", Enabled = false)]
         [Index(700), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
@@ -1130,6 +1163,27 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
             {
                 SetPropertyValue("ResumeOrder", ref _ResumeOrder, value);
             }
+        }
+
+        private string _SubmitBy;
+        [XafDisplayName("Submitted By"), ToolTip("Submitted By")]
+        [Index(9991), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        public string SubmitBy
+        {
+            get { return _SubmitBy; }
+            set { SetPropertyValue("SubmitBy", ref _SubmitBy, value); }
+        }
+
+        private DateTime _SubmitDate;
+        [Index(9992), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        [XafDisplayName("Submitted Date"), ToolTip("Submitted Date")]
+        [ModelDefault("DisplayFormat", "dd/MM/yyyy")]
+        [ModelDefault("EditMask", "dd/MM/yyyy")]
+        [DbType("datetime")]
+        public DateTime SubmitDate
+        {
+            get { return _SubmitDate; }
+            set { SetPropertyValue("SubmitDate", ref _SubmitDate, value); }
         }
 
         [Browsable(false)]

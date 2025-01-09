@@ -2,22 +2,13 @@
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.Editors;
-using DevExpress.ExpressApp.Layout;
-using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.ExpressApp.SystemModule;
-using DevExpress.ExpressApp.Templates;
-using DevExpress.ExpressApp.Utils;
 using DevExpress.ExpressApp.Web.SystemModule;
-using DevExpress.Persistent.Base;
-using DevExpress.Persistent.Validation;
 using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
 using OgawaPortal.Module.BusinessObjects.Sales_Order;
 using OgawaPortal.Module.Controllers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OgawaPortal.Module.Web.Controllers
 {
@@ -31,6 +22,8 @@ namespace OgawaPortal.Module.Web.Controllers
         protected override void OnActivated()
         {
             base.OnActivated();
+            Frame.GetController<ModificationsController>().SaveAndNewAction.Active.SetItemValue("Enabled", false);
+            Frame.GetController<ModificationsController>().SaveAndCloseAction.Active.SetItemValue("Enabled", false);
         }
         protected override void OnViewControlsCreated()
         {
@@ -57,6 +50,11 @@ namespace OgawaPortal.Module.Web.Controllers
 
                     if (ORDR.IsNew == true)
                     {
+                        if (View.Id == "OGW10ORDR_DetailView_EditOrder")
+                        {
+                            ORDR.EditAndCancel = true;
+                        }
+
                         ObjectSpace.CommitChanges();
                         base.Save(args);
                         ObjectSpace.Refresh();
@@ -87,6 +85,13 @@ namespace OgawaPortal.Module.Web.Controllers
                 }
             }
             #endregion
+            else
+            {
+                base.Save(args);
+                ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                View.BreakLinksToControls();
+                View.CreateControls();
+            }
 
             ObjectSpace.Refresh();
         }

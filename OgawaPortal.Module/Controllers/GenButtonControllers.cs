@@ -7,6 +7,7 @@ using DevExpress.Xpo.DB;
 using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Copy_Screen;
 using OgawaPortal.Module.BusinessObjects.Nonpersistent;
+using OgawaPortal.Module.BusinessObjects.POS___Exchange;
 using OgawaPortal.Module.BusinessObjects.Sales_Order;
 using OgawaPortal.Module.BusinessObjects.View;
 using System;
@@ -87,6 +88,23 @@ namespace OgawaPortal.Module.Controllers
                 if (View.Id == "CopyList_OGW11ORDR_LookupListView")
                 {
                     this.ViewDoc.Active.SetItemValue("Enabled", true);
+                }
+            }
+            /* OGW10ORDN */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
+            {
+                if (View.Id == "OGW10ORDN_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", false);
+                        this.CancelDoc.Active.SetItemValue("Enabled", false);
+                    }
+                    else
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", true);
+                        this.CancelDoc.Active.SetItemValue("Enabled", true);
+                    }
                 }
             }
             else
@@ -274,6 +292,35 @@ namespace OgawaPortal.Module.Controllers
                     throw new InvalidOperationException(ex.Message);
                 }
             }
+
+            /* OGW10ORDN */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
+            {
+                try
+                {
+                    OGW10ORDN ORDN = (OGW10ORDN)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    /* Validation End */
+
+                    ORDN.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+
+                    ORDN.SubmitBy = user.UserName;
+                    ORDN.SubmitDate = DateTime.Now;
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10ORDN trx = os.FindObject<OGW10ORDN>(new BinaryOperator("Oid", ORDN.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
         }
 
         private void CancelDoc_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -304,6 +351,39 @@ namespace OgawaPortal.Module.Controllers
 
                     IObjectSpace os = Application.CreateObjectSpace();
                     OGW10ORDR trx = os.FindObject<OGW10ORDR>(new BinaryOperator("Oid", ORDR.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10ORDN */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
+            {
+                try
+                {
+                    OGW10ORDN ORDN = (OGW10ORDN)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    if (string.IsNullOrEmpty(ORDN.Reason))
+                        throw new InvalidOperationException("Unable to cancel without reason.");
+
+                    if (ORDN.CancelType == null)
+                        throw new InvalidOperationException("Unable to cancel without cancel type.");
+
+                    /* Validation End */
+
+                    ORDN.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'CANCEL'"));
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10ORDN trx = os.FindObject<OGW10ORDN>(new BinaryOperator("Oid", ORDN.Oid));
                     genCon.openNewView(os, trx, ViewEditMode.View);
                     genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
                 }

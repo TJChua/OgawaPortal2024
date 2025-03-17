@@ -143,6 +143,12 @@
     <Compile Include="BusinessObjects\Maintenance\Voucher.cs" />
     <Compile Include="BusinessObjects\Nonpersistent\OGW10ChgOutlet.cs" />
     <Compile Include="BusinessObjects\Nonpersistent\OGW10OITMBrowse.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW10EXCO.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW10ORDN.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW11EXCO.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW11ORDN.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW12ORDN.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW15ORDN.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW10ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW11ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW12ORDR.cs" />

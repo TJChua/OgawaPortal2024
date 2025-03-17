@@ -6,6 +6,7 @@ using DevExpress.ExpressApp.SystemModule;
 using DevExpress.ExpressApp.Web.SystemModule;
 using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
+using OgawaPortal.Module.BusinessObjects.POS___Exchange;
 using OgawaPortal.Module.BusinessObjects.Sales_Order;
 using OgawaPortal.Module.Controllers;
 using System;
@@ -80,6 +81,45 @@ namespace OgawaPortal.Module.Web.Controllers
                         if (code != null)
                         {
                             genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + ORDR.ObjType.Code + "','" + ORDR.Oid + "','" + code.Oid + "', '" + ORDR.SalesOrderDate.ToString("yyyy-MM-dd") + "'");
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region OGW10ORDN
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
+            {
+                foreach (OGW10ORDN selectedObject in args.SelectedObjects)
+                {
+                    OGW10ORDN ORDN = (OGW10ORDN)selectedObject;
+
+                    if (ORDN.IsNew == true)
+                    {
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                    }
+                    else
+                    {
+                        ORDN.UpdateUser = user.UserName.ToString();
+                        ORDN.UpdateDate = DateTime.Now;
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                        ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                        View.BreakLinksToControls();
+                        View.CreateControls();
+                    }
+
+                    /* Generate Document Number */
+                    if (string.IsNullOrEmpty(ORDN.DocNum))
+                    {
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        OGW10NNM1 code = os.FindObject<OGW10NNM1>(CriteriaOperator.Parse("DocType.Code = ? AND IsActive = 'True'", ORDN.ObjType.Code));
+
+                        if (code != null)
+                        {
+                            genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + ORDN.ObjType.Code + "','" + ORDN.Oid + "','" + code.Oid + "', '" + ORDN.ReturnDate.ToString("yyyy-MM-dd") + "'");
                         }
                     }
                 }

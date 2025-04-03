@@ -7,6 +7,7 @@ using DevExpress.ExpressApp.Web.SystemModule;
 using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
 using OgawaPortal.Module.BusinessObjects.POS___Exchange;
+using OgawaPortal.Module.BusinessObjects.POS___Logistic;
 using OgawaPortal.Module.BusinessObjects.Sales_Order;
 using OgawaPortal.Module.Controllers;
 using System;
@@ -120,6 +121,84 @@ namespace OgawaPortal.Module.Web.Controllers
                         if (code != null)
                         {
                             genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + ORDN.ObjType.Code + "','" + ORDN.Oid + "','" + code.Oid + "', '" + ORDN.ReturnDate.ToString("yyyy-MM-dd") + "'");
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region OGW10EXCO
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                foreach (OGW10EXCO selectedObject in args.SelectedObjects)
+                {
+                    OGW10EXCO EXCO = (OGW10EXCO)selectedObject;
+
+                    if (EXCO.IsNew == true)
+                    {
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                    }
+                    else
+                    {
+                        EXCO.UpdateUser = user.UserName.ToString();
+                        EXCO.UpdateDate = DateTime.Now;
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                        ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                        View.BreakLinksToControls();
+                        View.CreateControls();
+                    }
+
+                    /* Generate Document Number */
+                    if (string.IsNullOrEmpty(EXCO.DocNum))
+                    {
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        OGW10NNM1 code = os.FindObject<OGW10NNM1>(CriteriaOperator.Parse("DocType.Code = ? AND IsActive = 'True'", EXCO.ObjType.Code));
+
+                        if (code != null)
+                        {
+                            genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + EXCO.ObjType.Code + "','" + EXCO.Oid + "','" + code.Oid + "', '" + EXCO.ReturnDate.ToString("yyyy-MM-dd") + "'");
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region OGW10EXCO
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                foreach (OGW10DREQ selectedObject in args.SelectedObjects)
+                {
+                    OGW10DREQ DREQ = (OGW10DREQ)selectedObject;
+
+                    if (DREQ.IsNew == true)
+                    {
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                    }
+                    else
+                    {
+                        DREQ.UpdateUser = user.UserName.ToString();
+                        DREQ.UpdateDate = DateTime.Now;
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                        ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                        View.BreakLinksToControls();
+                        View.CreateControls();
+                    }
+
+                    /* Generate Document Number */
+                    if (string.IsNullOrEmpty(DREQ.DocNum))
+                    {
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        OGW10NNM1 code = os.FindObject<OGW10NNM1>(CriteriaOperator.Parse("DocType.Code = ? AND IsActive = 'True'", DREQ.ObjType.Code));
+
+                        if (code != null)
+                        {
+                            genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + DREQ.ObjType.Code + "','" + DREQ.Oid + "','" + code.Oid + "', '" + DREQ.DeliveryReqDate.ToString("yyyy-MM-dd") + "'");
                         }
                     }
                 }

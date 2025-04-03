@@ -147,8 +147,16 @@
     <Compile Include="BusinessObjects\POS - Exchange\OGW10ORDN.cs" />
     <Compile Include="BusinessObjects\POS - Exchange\OGW11EXCO.cs" />
     <Compile Include="BusinessObjects\POS - Exchange\OGW11ORDN.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW12EXCO.cs" />
     <Compile Include="BusinessObjects\POS - Exchange\OGW12ORDN.cs" />
+    <Compile Include="BusinessObjects\POS - Exchange\OGW15EXCO.cs" />
     <Compile Include="BusinessObjects\POS - Exchange\OGW15ORDN.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW10DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW10DREX.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW11DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW12DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW13DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW15DREQ.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW10ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW11ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW12ORDR.cs" />

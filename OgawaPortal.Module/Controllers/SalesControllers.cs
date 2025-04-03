@@ -6,6 +6,7 @@ using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Copy_Screen;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
 using OgawaPortal.Module.BusinessObjects.POS___Exchange;
+using OgawaPortal.Module.BusinessObjects.POS___Logistic;
 using OgawaPortal.Module.BusinessObjects.Sales_Order;
 using OgawaPortal.Module.BusinessObjects.View;
 using System;
@@ -80,6 +81,36 @@ namespace OgawaPortal.Module.Controllers
             else if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
             {
                 if (View.Id == "OGW10ORDN_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.CopyFrmSO.Active.SetItemValue("Enabled", true);
+                    }
+                    else
+                    {
+                        this.CopyFrmSO.Active.SetItemValue("Enabled", false);
+                    }
+                }
+            }
+            /* OGW10EXCO */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                if (View.Id == "OGW10EXCO_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.CopyFrmSO.Active.SetItemValue("Enabled", true);
+                    }
+                    else
+                    {
+                        this.CopyFrmSO.Active.SetItemValue("Enabled", false);
+                    }
+                }
+            }
+            /* OGW10DREQ */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                if (View.Id == "OGW10DREQ_DetailView")
                 {
                     if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
                     {
@@ -425,6 +456,271 @@ namespace OgawaPortal.Module.Controllers
                     throw new InvalidOperationException(ex.Message);
                 }
             }
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                try
+                {
+                    int row = 0;
+                    OGW10EXCO EXCO = (OGW10EXCO)View.CurrentObject;
+
+                    foreach (CopyList_OGW11ORDR dtl in ((ListView)e.PopupWindow.View).SelectedObjects)
+                    {
+                        if (dtl.Header.BillName != null)
+                        {
+                            EXCO.BillName = EXCO.Session.GetObjectByKey<Customer>(dtl.Header.BillName.Oid);
+                        }
+                        EXCO.BillAddress1 = dtl.Header.BillAddress1;
+                        EXCO.BillAddress2 = dtl.Header.BillAddress2;
+                        EXCO.BillCity = dtl.Header.BillCity;
+                        EXCO.BillDistrict = dtl.Header.BillDistrict;
+                        EXCO.BillPostCode = dtl.Header.BillPostCode;
+                        EXCO.BillCountry = dtl.Header.BillCountry;
+                        EXCO.BillMobilePhone = dtl.Header.BillMobilePhone;
+                        EXCO.BillHomePhone = dtl.Header.BillHomePhone;
+                        EXCO.BillEmail = dtl.Header.BillEmail;
+                        EXCO.BillIdentityNo = dtl.Header.BillIdentityNo;
+                        if (EXCO.BillRace != null)
+                        {
+                            EXCO.BillRace = EXCO.Session.GetObjectByKey<Races>(EXCO.BillRace.Oid);
+                        }
+
+                        if (EXCO.DeliveryContact != null)
+                        {
+                            EXCO.DeliveryContact = EXCO.Session.GetObjectByKey<Customer>(dtl.Header.DeliveryContact.Oid);
+                        }
+                        EXCO.DeliveryAddress1 = dtl.Header.DeliveryAddress1;
+                        EXCO.DeliveryAddress2 = dtl.Header.DeliveryAddress2;
+                        EXCO.DeliveryCity = dtl.Header.DeliveryCity;
+                        EXCO.DeliveryDistrict = dtl.Header.DeliveryDistrict;
+                        EXCO.DeliveryPostCode = dtl.Header.DeliveryPostCode;
+                        EXCO.DeliveryCountry = dtl.Header.DeliveryCountry;
+                        EXCO.DeliveryMobilePhone = dtl.Header.DeliveryMobilePhone;
+                        EXCO.DeliveryHomePhone = dtl.Header.DeliveryHomePhone;
+                        if (dtl.Header.DeliveryRace != null)
+                        {
+                            EXCO.DeliveryRace = EXCO.Session.GetObjectByKey<Races>(dtl.Header.DeliveryRace.Oid);
+                        }
+
+                        foreach (OGW11ORDR item in dtl.Header.OGW11ORDR)
+                        {
+                            OGW11EXCO EXCO11 = new OGW11EXCO(EXCO.Session);
+
+                            EXCO11.Class = item.Class;
+                            EXCO11.ItemCode = EXCO11.Session.GetObjectByKey<vwItemMasters>(item.ItemCode.ItemCode);
+                            EXCO11.ItemName = item.ItemName;
+                            EXCO11.UnitPrice = item.UnitPrice;
+                            EXCO11.Order = item.UnitPrice;
+                            EXCO11.Taken = item.Taken;
+                            EXCO11.BackOrder = item.BackOrder;
+                            EXCO11.BaseEntry = item.DocEntry.Oid;
+                            EXCO11.BaseOid = item.Oid;
+
+                            EXCO.OGW11EXCO.Add(EXCO11);
+                        }
+
+                        foreach (OGW12ORDR payment in dtl.Header.OGW12ORDR)
+                        {
+                            OGW12EXCO EXCO12 = new OGW12EXCO(EXCO.Session);
+
+                            EXCO12.PaymentMethod = payment.PaymentMethod;
+                            EXCO12.CashAcctCode = payment.CashAcctCode;
+                            if (payment.Consignment != null)
+                            {
+                                EXCO12.Consignment = EXCO12.Session.GetObjectByKey<Consignment>(payment.Consignment.Oid);
+                            }
+                            EXCO12.CashAmount = payment.CashAmount;
+                            EXCO12.CashRefNum = payment.CashRefNum;
+                            EXCO12.CreditCardAcctCode = payment.CreditCardAcctCode;
+                            if (payment.CardType != null)
+                            {
+                                EXCO12.CardType = EXCO12.Session.GetObjectByKey<CardType>(payment.CardType.Oid);
+                            }
+                            EXCO12.CreditCardNo = payment.CreditCardNo;
+                            EXCO12.CardHolderName = payment.CardHolderName;
+                            if (payment.Instalment != null)
+                            {
+                                EXCO12.Instalment = EXCO12.Session.GetObjectByKey<Instalment>(payment.Instalment.Oid);
+                            }
+                            EXCO12.TerminalID = payment.TerminalID;
+                            if (payment.CardIssuer != null)
+                            {
+                                EXCO12.CardIssuer = EXCO12.Session.GetObjectByKey<CardIssuer>(payment.CardIssuer.Oid);
+                            }
+                            if (payment.Merchant != null)
+                            {
+                                EXCO12.Merchant = EXCO12.Session.GetObjectByKey<CardMachineBank>(payment.Merchant.Oid);
+                            }
+                            EXCO12.ApprovalCode = payment.ApprovalCode;
+                            EXCO12.BatchNo = payment.BatchNo;
+                            EXCO12.Transaction = payment.Transaction;
+                            EXCO12.CreditCardAmount = payment.CreditCardAmount;
+                            EXCO12.VoucherAcctCode = payment.VoucherAcctCode;
+                            if (payment.VoucherType != null)
+                            {
+                                EXCO12.VoucherType = EXCO12.Session.GetObjectByKey<Voucher>(payment.VoucherType.Oid);
+                            }
+                            EXCO12.VoucherNo = payment.VoucherNo;
+                            if (payment.TaxCode != null)
+                            {
+                                EXCO12.TaxCode = EXCO12.Session.GetObjectByKey<vwTax>(payment.TaxCode.Code);
+                            }
+                            EXCO12.VoucherAmount = payment.VoucherAmount;
+                            EXCO12.PaymentTotal = payment.PaymentTotal;
+                            EXCO12.BaseEntry = payment.DocEntry.Oid;
+                            EXCO12.BaseOid = payment.Oid;
+
+                            EXCO.OGW12EXCO.Add(EXCO12);
+                        }
+                    }
+
+                    ObjectSpace.CommitChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                try
+                {
+                    int row = 0;
+                    OGW10DREQ DREQ = (OGW10DREQ)View.CurrentObject;
+
+                    foreach (CopyList_OGW11ORDR dtl in ((ListView)e.PopupWindow.View).SelectedObjects)
+                    {
+                        if (dtl.Header.BillName != null)
+                        {
+                            DREQ.BillName = DREQ.Session.GetObjectByKey<Customer>(dtl.Header.BillName.Oid);
+                        }
+                        DREQ.BillAddress1 = dtl.Header.BillAddress1;
+                        DREQ.BillAddress2 = dtl.Header.BillAddress2;
+                        DREQ.BillCity = dtl.Header.BillCity;
+                        DREQ.BillDistrict = dtl.Header.BillDistrict;
+                        DREQ.BillPostCode = dtl.Header.BillPostCode;
+                        DREQ.BillCountry = dtl.Header.BillCountry;
+                        DREQ.BillMobilePhone = dtl.Header.BillMobilePhone;
+                        DREQ.BillHomePhone = dtl.Header.BillHomePhone;
+                        DREQ.BillEmail = dtl.Header.BillEmail;
+                        DREQ.BillIdentityNo = dtl.Header.BillIdentityNo;
+                        if (DREQ.BillRace != null)
+                        {
+                            DREQ.BillRace = DREQ.Session.GetObjectByKey<Races>(DREQ.BillRace.Oid);
+                        }
+
+                        if (DREQ.DeliveryContact != null)
+                        {
+                            DREQ.DeliveryContact = DREQ.Session.GetObjectByKey<Customer>(dtl.Header.DeliveryContact.Oid);
+                        }
+                        DREQ.DeliveryAddress1 = dtl.Header.DeliveryAddress1;
+                        DREQ.DeliveryAddress2 = dtl.Header.DeliveryAddress2;
+                        DREQ.DeliveryCity = dtl.Header.DeliveryCity;
+                        DREQ.DeliveryDistrict = dtl.Header.DeliveryDistrict;
+                        DREQ.DeliveryPostCode = dtl.Header.DeliveryPostCode;
+                        DREQ.DeliveryCountry = dtl.Header.DeliveryCountry;
+                        DREQ.DeliveryMobilePhone = dtl.Header.DeliveryMobilePhone;
+                        DREQ.DeliveryHomePhone = dtl.Header.DeliveryHomePhone;
+                        if (dtl.Header.DeliveryRace != null)
+                        {
+                            DREQ.DeliveryRace = DREQ.Session.GetObjectByKey<Races>(dtl.Header.DeliveryRace.Oid);
+                        }
+
+                        DREQ.SubTotal = dtl.Header.SubTotal;
+                        DREQ.OrderDiscount = dtl.Header.OrderDiscount;
+                        DREQ.Tax = dtl.Header.Tax;
+                        DREQ.TotalDue = dtl.Header.TotalDue;
+                        DREQ.SettlementDiscount = dtl.Header.SettlementDiscount;
+                        DREQ.NetTotalDue = dtl.Header.NetTotalDue;
+                        DREQ.Cash = dtl.Header.Cash;
+                        DREQ.CreditCard = dtl.Header.CreditCard;
+                        DREQ.Voucher = dtl.Header.Voucher;
+                        DREQ.CreditNote = dtl.Header.CreditNote;
+                        DREQ.PreviousPayment = dtl.Header.PreviousPayment;
+                        DREQ.OrderBalanceDue = dtl.Header.OrderBalanceDue;
+                        DREQ.MinimumDue = dtl.Header.MinimumDue;
+                        DREQ.MinDueBalance = dtl.Header.MinDueBalance;
+
+                        foreach (OGW11ORDR item in dtl.Header.OGW11ORDR)
+                        {
+                            OGW11DREQ DREQ11 = new OGW11DREQ(DREQ.Session);
+
+                            DREQ11.Class = item.Class;
+                            DREQ11.ItemCode = DREQ11.Session.GetObjectByKey<vwItemMasters>(item.ItemCode.ItemCode);
+                            DREQ11.ItemName = item.ItemName;
+                            DREQ11.UnitPrice = item.UnitPrice;
+                            DREQ11.Order = item.UnitPrice;
+                            DREQ11.Taken = item.Taken;
+                            DREQ11.BackOrder = item.BackOrder;
+                            DREQ11.BaseEntry = item.DocEntry.Oid;
+                            DREQ11.BaseOid = item.Oid;
+
+                            DREQ.OGW11DREQ.Add(DREQ11);
+                        }
+
+                        foreach (OGW12ORDR payment in dtl.Header.OGW12ORDR)
+                        {
+                            OGW12DREQ DREQ12 = new OGW12DREQ(DREQ.Session);
+
+                            DREQ12.PaymentMethod = payment.PaymentMethod;
+                            DREQ12.CashAcctCode = payment.CashAcctCode;
+                            if (payment.Consignment != null)
+                            {
+                                DREQ12.Consignment = DREQ12.Session.GetObjectByKey<Consignment>(payment.Consignment.Oid);
+                            }
+                            DREQ12.CashAmount = payment.CashAmount;
+                            DREQ12.CashRefNum = payment.CashRefNum;
+                            DREQ12.CreditCardAcctCode = payment.CreditCardAcctCode;
+                            if (payment.CardType != null)
+                            {
+                                DREQ12.CardType = DREQ12.Session.GetObjectByKey<CardType>(payment.CardType.Oid);
+                            }
+                            DREQ12.CreditCardNo = payment.CreditCardNo;
+                            DREQ12.CardHolderName = payment.CardHolderName;
+                            if (payment.Instalment != null)
+                            {
+                                DREQ12.Instalment = DREQ12.Session.GetObjectByKey<Instalment>(payment.Instalment.Oid);
+                            }
+                            DREQ12.TerminalID = payment.TerminalID;
+                            if (payment.CardIssuer != null)
+                            {
+                                DREQ12.CardIssuer = DREQ12.Session.GetObjectByKey<CardIssuer>(payment.CardIssuer.Oid);
+                            }
+                            if (payment.Merchant != null)
+                            {
+                                DREQ12.Merchant = DREQ12.Session.GetObjectByKey<CardMachineBank>(payment.Merchant.Oid);
+                            }
+                            DREQ12.ApprovalCode = payment.ApprovalCode;
+                            DREQ12.BatchNo = payment.BatchNo;
+                            DREQ12.Transaction = payment.Transaction;
+                            DREQ12.CreditCardAmount = payment.CreditCardAmount;
+                            DREQ12.VoucherAcctCode = payment.VoucherAcctCode;
+                            if (payment.VoucherType != null)
+                            {
+                                DREQ12.VoucherType = DREQ12.Session.GetObjectByKey<Voucher>(payment.VoucherType.Oid);
+                            }
+                            DREQ12.VoucherNo = payment.VoucherNo;
+                            if (payment.TaxCode != null)
+                            {
+                                DREQ12.TaxCode = DREQ12.Session.GetObjectByKey<vwTax>(payment.TaxCode.Code);
+                            }
+                            DREQ12.VoucherAmount = payment.VoucherAmount;
+                            DREQ12.PaymentTotal = payment.PaymentTotal;
+                            DREQ12.BaseEntry = payment.DocEntry.Oid;
+                            DREQ12.BaseOid = payment.Oid;
+
+                            DREQ.OGW12DREQ.Add(DREQ12);
+                        }
+                    }
+
+                    ObjectSpace.CommitChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
         }
 
         private void CopyFrmSO_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
@@ -483,7 +779,79 @@ namespace OgawaPortal.Module.Controllers
                 {
                     using (SqlDataAdapter da = new SqlDataAdapter("", conn))
                     {
-                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10ORDR', '" + ObjType + "', '" + Customer + "' ";
+                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10ORDR', 'OGW10ORDN', '" + Customer + "' ";
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dtrow in dt.Rows)
+                            {
+                                CopyList_OGW11ORDR SO = os.CreateObject<CopyList_OGW11ORDR>();
+
+                                SO.Oid = int.Parse(dtrow["Oid"].ToString());
+                                SO.Header = ObjectSpace.GetObjectByKey<OGW10ORDR>(dtrow["Header"]);
+                                //SO.Details = ObjectSpace.GetObjectByKey<OGW11ORDR>(dtrow["Details"]);
+                                collectionSource.List.Add(SO);
+                            }
+                        }
+                    }
+                }
+
+                e.View = Application.CreateListView(listViewId, collectionSource, true);
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                OGW10EXCO EXCO = (OGW10EXCO)View.CurrentObject;
+
+                Customer = EXCO.Name != null ? EXCO.Name.Oid.ToString() : "";
+
+                IObjectSpace os = Application.CreateObjectSpace(typeof(CopyList_OGW11ORDR));
+                string listViewId = Application.FindLookupListViewId(typeof(CopyList_OGW11ORDR));
+                CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(CopyList_OGW11ORDR), listViewId);
+
+                using (SqlConnection conn = new SqlConnection(genCon.getConnectionString()))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter("", conn))
+                    {
+                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10ORDR', 'OGW10EXCO', '" + Customer + "' ";
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dtrow in dt.Rows)
+                            {
+                                CopyList_OGW11ORDR SO = os.CreateObject<CopyList_OGW11ORDR>();
+
+                                SO.Oid = int.Parse(dtrow["Oid"].ToString());
+                                SO.Header = ObjectSpace.GetObjectByKey<OGW10ORDR>(dtrow["Header"]);
+                                //SO.Details = ObjectSpace.GetObjectByKey<OGW11ORDR>(dtrow["Details"]);
+                                collectionSource.List.Add(SO);
+                            }
+                        }
+                    }
+                }
+
+                e.View = Application.CreateListView(listViewId, collectionSource, true);
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                OGW10DREQ DREQ = (OGW10DREQ)View.CurrentObject;
+
+                //Customer = DREQ.Name != null ? DREQ.Name.Oid.ToString() : "";
+
+                IObjectSpace os = Application.CreateObjectSpace(typeof(CopyList_OGW11ORDR));
+                string listViewId = Application.FindLookupListViewId(typeof(CopyList_OGW11ORDR));
+                CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(CopyList_OGW11ORDR), listViewId);
+
+                using (SqlConnection conn = new SqlConnection(genCon.getConnectionString()))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter("", conn))
+                    {
+                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10ORDR', 'OGW10DREQ', '" + Customer + "' ";
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 

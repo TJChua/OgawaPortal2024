@@ -8,6 +8,7 @@ using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Copy_Screen;
 using OgawaPortal.Module.BusinessObjects.Nonpersistent;
 using OgawaPortal.Module.BusinessObjects.POS___Exchange;
+using OgawaPortal.Module.BusinessObjects.POS___Logistic;
 using OgawaPortal.Module.BusinessObjects.Sales_Order;
 using OgawaPortal.Module.BusinessObjects.View;
 using System;
@@ -94,6 +95,40 @@ namespace OgawaPortal.Module.Controllers
             else if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
             {
                 if (View.Id == "OGW10ORDN_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", false);
+                        this.CancelDoc.Active.SetItemValue("Enabled", false);
+                    }
+                    else
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", true);
+                        this.CancelDoc.Active.SetItemValue("Enabled", true);
+                    }
+                }
+            }
+            /* OGW10EXCO */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                if (View.Id == "OGW10EXCO_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", false);
+                        this.CancelDoc.Active.SetItemValue("Enabled", false);
+                    }
+                    else
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", true);
+                        this.CancelDoc.Active.SetItemValue("Enabled", true);
+                    }
+                }
+            }
+            /* OGW10DREQ */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                if (View.Id == "OGW10DREQ_DetailView")
                 {
                     if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
                     {
@@ -321,6 +356,64 @@ namespace OgawaPortal.Module.Controllers
                     throw new InvalidOperationException(ex.Message);
                 }
             }
+
+            /* OGW10EXCO */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                try
+                {
+                    OGW10EXCO EXCO = (OGW10EXCO)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    /* Validation End */
+
+                    EXCO.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+
+                    EXCO.SubmitBy = user.UserName;
+                    EXCO.SubmitDate = DateTime.Now;
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10EXCO trx = os.FindObject<OGW10EXCO>(new BinaryOperator("Oid", EXCO.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10DREQ */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                try
+                {
+                    OGW10DREQ DREQ = (OGW10DREQ)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    /* Validation End */
+
+                    DREQ.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+
+                    DREQ.SubmitBy = user.UserName;
+                    DREQ.SubmitDate = DateTime.Now;
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10DREQ trx = os.FindObject<OGW10DREQ>(new BinaryOperator("Oid", DREQ.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
         }
 
         private void CancelDoc_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -384,6 +477,72 @@ namespace OgawaPortal.Module.Controllers
 
                     IObjectSpace os = Application.CreateObjectSpace();
                     OGW10ORDN trx = os.FindObject<OGW10ORDN>(new BinaryOperator("Oid", ORDN.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10EXCO */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10EXCO))
+            {
+                try
+                {
+                    OGW10EXCO EXCO = (OGW10EXCO)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    if (string.IsNullOrEmpty(EXCO.Reason))
+                        throw new InvalidOperationException("Unable to cancel without reason.");
+
+                    if (EXCO.CancelType == null)
+                        throw new InvalidOperationException("Unable to cancel without cancel type.");
+
+                    /* Validation End */
+
+                    EXCO.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'CANCEL'"));
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10EXCO trx = os.FindObject<OGW10EXCO>(new BinaryOperator("Oid", EXCO.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10DREQ */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
+            {
+                try
+                {
+                    OGW10DREQ DREQ = (OGW10DREQ)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    //if (string.IsNullOrEmpty(DREQ.Reason))
+                    //    throw new InvalidOperationException("Unable to cancel without reason.");
+
+                    //if (DREQ.CancelType == null)
+                    //    throw new InvalidOperationException("Unable to cancel without cancel type.");
+
+                    /* Validation End */
+
+                    DREQ.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'CANCEL'"));
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10DREQ trx = os.FindObject<OGW10DREQ>(new BinaryOperator("Oid", DREQ.Oid));
                     genCon.openNewView(os, trx, ViewEditMode.View);
                     genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
                 }

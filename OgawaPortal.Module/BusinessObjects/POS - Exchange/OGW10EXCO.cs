@@ -25,8 +25,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
     [Appearance("HideDelete", AppearanceItemType = "Action", TargetItems = "Delete", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("HideSubmit", AppearanceItemType = "Action", TargetItems = "SubmitDoc", Criteria = "IsNew or NOT Status.Code IN ('DRAFT','REOPEN')", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("HideCancel", AppearanceItemType = "Action", TargetItems = "CancelDoc", Criteria = "IsNew or Status.Code IN ('CANCEL','CLOSED')", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("HideClose", AppearanceItemType = "Action", TargetItems = "CloseDoc", Criteria = "IsNew or Status.Code IN ('CANCEL','CLOSED')", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("HideORDNCopyFrmSO", AppearanceItemType = "Action", TargetItems = "CopyFrmSO", Criteria = "IsNew or Status.Code != 'DRAFT'", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("HideEXCOCopyFrmSO", AppearanceItemType = "Action", TargetItems = "CopyFrmSO", Criteria = "IsNew or Status.Code != 'DRAFT'", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     public class OGW10EXCO : XPObject
     { 
         public OGW10EXCO(Session session)
@@ -850,7 +849,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
 
         [Association("OGW10EXCO-OGW11EXCO")]
         [XafDisplayName("Items")]
-        [Appearance("OGW11ORDN", Enabled = false, Criteria = "IsNew")]
+        [Appearance("OGW11EXCO", Enabled = false, Criteria = "IsNew")]
         public XPCollection<OGW11EXCO> OGW11EXCO
         {
             get { return GetCollection<OGW11EXCO>("OGW11EXCO"); }

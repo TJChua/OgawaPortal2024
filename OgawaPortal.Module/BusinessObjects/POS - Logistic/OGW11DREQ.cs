@@ -8,16 +8,16 @@ using OgawaPortal.Module.BusinessObjects.View;
 using System;
 using System.ComponentModel;
 
-namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
+namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
 {
-    [XafDisplayName("Exchange Out Details")]
+    [XafDisplayName("Delivery Request Details")]
     [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("LinkDoc", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("UnlinkDoc", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    public class OGW11EXCO : XPObject
+
+    public class OGW11DREQ : XPObject
     { 
-        public OGW11EXCO(Session session)
+        public OGW11DREQ(Session session)
             : base(session)
         {
         }
@@ -28,11 +28,11 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
             CreateDate = DateTime.Now;
         }
 
-        private OGW10EXCO _DocEntry;
-        [Association("OGW10EXCO-OGW11EXCO")]
+        private OGW10DREQ _DocEntry;
+        [Association("OGW10DREQ-OGW11DREQ")]
         [Index(0), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
         [Appearance("DocEntry", Enabled = false)]
-        public OGW10EXCO DocEntry
+        public OGW10DREQ DocEntry
         {
             get { return _DocEntry; }
             set { SetPropertyValue("DocEntry", ref _DocEntry, value); }
@@ -147,28 +147,12 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
             }
         }
 
-        private decimal _RevisedSellingPrice;
-        [ImmediatePostData]
-        [DbType("numeric(19,6)")]
-        [ModelDefault("DisplayFormat", "n2")]
-        [ModelDefault("EditMask", "n2")]
-        [Index(20), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
-        [XafDisplayName("Revised Selling Price")]
-        public decimal RevisedSellingPrice
-        {
-            get { return _RevisedSellingPrice; }
-            set
-            {
-                SetPropertyValue("RevisedSellingPrice", ref _RevisedSellingPrice, value);
-            }
-        }
-
         private decimal _UnitPrice;
         [ImmediatePostData]
         [DbType("numeric(19,6)")]
         [ModelDefault("DisplayFormat", "n2")]
         [ModelDefault("EditMask", "n2")]
-        [Index(23), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(23), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         [XafDisplayName("Unit Price")]
         public decimal UnitPrice
         {
@@ -185,7 +169,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
 
         private decimal _Order;
         [ImmediatePostData]
-        [Index(25), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        [Index(25), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         [DbType("numeric(19,6)")]
         [ModelDefault("DisplayFormat", "n2")]
         [ModelDefault("EditMask", "n2")]
@@ -205,7 +189,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
 
         private decimal _Taken;
         [ImmediatePostData]
-        [Index(28), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(28), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         [DbType("numeric(19,6)")]
         [ModelDefault("DisplayFormat", "n2")]
         [ModelDefault("EditMask", "n2")]
@@ -225,7 +209,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
 
         private decimal _BackOrder;
         [ImmediatePostData]
-        [Index(30), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(30), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         [DbType("numeric(19,6)")]
         [ModelDefault("DisplayFormat", "n2")]
         [ModelDefault("EditMask", "n2")]
@@ -239,61 +223,13 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
             }
         }
 
-        private decimal _Balance;
-        [ImmediatePostData]
-        [Index(31), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
-        [DbType("numeric(19,6)")]
-        [ModelDefault("DisplayFormat", "n2")]
-        [ModelDefault("EditMask", "n2")]
-        [XafDisplayName("Balance")]
-        public decimal Balance
-        {
-            get { return _Balance; }
-            set
-            {
-                SetPropertyValue("Balance", ref _Balance, value);
-            }
-        }
-
-        private decimal _OutletCollect;
-        [ImmediatePostData]
-        [Index(32), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
-        [DbType("numeric(19,6)")]
-        [ModelDefault("DisplayFormat", "n2")]
-        [ModelDefault("EditMask", "n2")]
-        [XafDisplayName("Outlet Collect")]
-        public decimal OutletCollect
-        {
-            get { return _OutletCollect; }
-            set
-            {
-                SetPropertyValue("OutletCollect", ref _OutletCollect, value);
-            }
-        }
-
-        private decimal _ToShip;
-        [ImmediatePostData]
-        [Index(33), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
-        [DbType("numeric(19,6)")]
-        [ModelDefault("DisplayFormat", "n2")]
-        [ModelDefault("EditMask", "n2")]
-        [XafDisplayName("To Ship")]
-        public decimal ToShip
-        {
-            get { return ToShip; }
-            set
-            {
-                SetPropertyValue("ToShip", ref _ToShip, value);
-            }
-        }
-
         private decimal _Amount;
         [ImmediatePostData]
         [DbType("numeric(19,6)")]
         [ModelDefault("DisplayFormat", "n2")]
         [ModelDefault("EditMask", "n2")]
         [Appearance("Amount", Enabled = false)]
-        [Index(34), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(33), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         [XafDisplayName("Amount")]
         public decimal Amount
         {
@@ -306,7 +242,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
 
         private string _SeriesNumber;
         [XafDisplayName("Series Number")]
-        [Index(35), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(35), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         public string SeriesNumber
         {
             get { return _SeriesNumber; }
@@ -318,7 +254,7 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
 
         private string _Remarks;
         [XafDisplayName("Remarks")]
-        [Index(38), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(38), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         public string Remarks
         {
             get { return _Remarks; }

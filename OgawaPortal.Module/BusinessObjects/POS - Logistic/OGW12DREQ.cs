@@ -3,23 +3,21 @@ using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
-using DevExpress.Persistent.BaseImpl;
-using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
 using OgawaPortal.Module.BusinessObjects.View;
 using System;
 using System.ComponentModel;
 
-namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
+namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
 {
-    [XafDisplayName("Sales Payment")]
+    [XafDisplayName("Delivery Request Payment")]
     [Appearance("LinkDoc", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("UnlinkDoc", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
 
-    public class OGW12ORDN : XPObject
+    public class OGW12DREQ : XPObject
     { 
-        public OGW12ORDN(Session session)
+        public OGW12DREQ(Session session)
             : base(session)
         {
         }
@@ -30,11 +28,11 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Exchange
             CreateDate = DateTime.Now;
         }
 
-        private OGW10ORDN _DocEntry;
-        [Association("OGW10ORDN-OGW12ORDN")]
+        private OGW10DREQ _DocEntry;
+        [Association("OGW10DREQ-OGW12DREQ")]
         [Index(0), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
         [Appearance("DocEntry", Enabled = false)]
-        public OGW10ORDN DocEntry
+        public OGW10DREQ DocEntry
         {
             get { return _DocEntry; }
             set { SetPropertyValue("DocEntry", ref _DocEntry, value); }

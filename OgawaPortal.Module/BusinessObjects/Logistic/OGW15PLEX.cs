@@ -6,19 +6,18 @@ using DevExpress.Xpo;
 using OgawaPortal.Module.BusinessObjects.View;
 using System;
 
-
-namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
+namespace OgawaPortal.Module.BusinessObjects.Logistic
 {
-    [Appearance("DREQDocStatuses1", AppearanceItemType = "Action", TargetItems = "New", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses2", AppearanceItemType = "Action", TargetItems = "Edit", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses3", AppearanceItemType = "Action", TargetItems = "Link", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses4", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses5", AppearanceItemType = "Action", TargetItems = "Delete", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [XafDisplayName("DREQ Document Trail")]
+    [Appearance("PLEXDocStatuses1", AppearanceItemType = "Action", TargetItems = "New", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("PLEXDocStatuses2", AppearanceItemType = "Action", TargetItems = "Edit", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("PLEXDocStatuses3", AppearanceItemType = "Action", TargetItems = "Link", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("PLEXDocStatuses4", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("PLEXDocStatuses5", AppearanceItemType = "Action", TargetItems = "Delete", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [XafDisplayName("PLEX Document Trail")]
 
-    public class OGW15DREQ : XPObject
-    { 
-        public OGW15DREQ(Session session)
+    public class OGW15PLEX : XPObject
+    {
+        public OGW15PLEX(Session session)
             : base(session)
         {
         }
@@ -29,11 +28,11 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
             CreateDate = DateTime.Now;
         }
 
-        private OGW10DREQ _DocEntry;
-        [Association("OGW10DREQ-OGW15DREQ")]
+        private OGW10PLEX _DocEntry;
+        [Association("OGW10PLEX-OGW15PLEX")]
         [Index(0), VisibleInListView(false), VisibleInDetailView(true), VisibleInLookupListView(false)]
         [Appearance("DocEntry", Enabled = false)]
-        public OGW10DREQ DocEntry
+        public OGW10PLEX DocEntry
         {
             get { return _DocEntry; }
             set { SetPropertyValue("DocEntry", ref _DocEntry, value); }

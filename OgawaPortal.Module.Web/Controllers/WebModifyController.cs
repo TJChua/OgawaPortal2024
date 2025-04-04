@@ -5,6 +5,7 @@ using DevExpress.ExpressApp.Editors;
 using DevExpress.ExpressApp.SystemModule;
 using DevExpress.ExpressApp.Web.SystemModule;
 using OgawaPortal.Module.BusinessObjects;
+using OgawaPortal.Module.BusinessObjects.Logistic;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
 using OgawaPortal.Module.BusinessObjects.POS___Exchange;
 using OgawaPortal.Module.BusinessObjects.POS___Logistic;
@@ -199,6 +200,123 @@ namespace OgawaPortal.Module.Web.Controllers
                         if (code != null)
                         {
                             genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + DREQ.ObjType.Code + "','" + DREQ.Oid + "','" + code.Oid + "', '" + DREQ.DeliveryReqDate.ToString("yyyy-MM-dd") + "'");
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region OGW10DREX
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                foreach (OGW10DREX selectedObject in args.SelectedObjects)
+                {
+                    OGW10DREX DREX = (OGW10DREX)selectedObject;
+
+                    if (DREX.IsNew == true)
+                    {
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                    }
+                    else
+                    {
+                        DREX.UpdateUser = user.UserName.ToString();
+                        DREX.UpdateDate = DateTime.Now;
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                        ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                        View.BreakLinksToControls();
+                        View.CreateControls();
+                    }
+
+                    /* Generate Document Number */
+                    if (string.IsNullOrEmpty(DREX.DocNum))
+                    {
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        OGW10NNM1 code = os.FindObject<OGW10NNM1>(CriteriaOperator.Parse("DocType.Code = ? AND IsActive = 'True'", DREX.ObjType.Code));
+
+                        if (code != null)
+                        {
+                            genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + DREX.ObjType.Code + "','" + DREX.Oid + "','" + code.Oid + "', '" + DREX.DeliveryRequestDate.ToString("yyyy-MM-dd") + "'");
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region OGW10OPKL
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                foreach (OGW10OPKL selectedObject in args.SelectedObjects)
+                {
+                    OGW10OPKL OPKL = (OGW10OPKL)selectedObject;
+
+                    if (OPKL.IsNew == true)
+                    {
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                    }
+                    else
+                    {
+                        OPKL.UpdateUser = user.UserName.ToString();
+                        OPKL.UpdateDate = DateTime.Now;
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                        ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                        View.BreakLinksToControls();
+                        View.CreateControls();
+                    }
+
+                    /* Generate Document Number */
+                    if (string.IsNullOrEmpty(OPKL.DocNum))
+                    {
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        OGW10NNM1 code = os.FindObject<OGW10NNM1>(CriteriaOperator.Parse("DocType.Code = ? AND IsActive = 'True'", OPKL.ObjType.Code));
+
+                        if (code != null)
+                        {
+                            genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + OPKL.ObjType.Code + "','" + OPKL.Oid + "','" + code.Oid + "', '" + OPKL.DocDate.ToString("yyyy-MM-dd") + "'");
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region OGW10PLEX
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                foreach (OGW10PLEX selectedObject in args.SelectedObjects)
+                {
+                    OGW10PLEX PLEX = (OGW10PLEX)selectedObject;
+
+                    if (PLEX.IsNew == true)
+                    {
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                    }
+                    else
+                    {
+                        PLEX.UpdateUser = user.UserName.ToString();
+                        PLEX.UpdateDate = DateTime.Now;
+                        ObjectSpace.CommitChanges();
+                        base.Save(args);
+                        ObjectSpace.Refresh();
+                        ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                        View.BreakLinksToControls();
+                        View.CreateControls();
+                    }
+
+                    /* Generate Document Number */
+                    if (string.IsNullOrEmpty(PLEX.DocNum))
+                    {
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        OGW10NNM1 code = os.FindObject<OGW10NNM1>(CriteriaOperator.Parse("DocType.Code = ? AND IsActive = 'True'", PLEX.ObjType.Code));
+
+                        if (code != null)
+                        {
+                            genCon.executeNonQuery("EXEC FTS_sp_GenAutoNumbering '" + PLEX.ObjType.Code + "','" + PLEX.Oid + "','" + code.Oid + "', '" + PLEX.DocDate.ToString("yyyy-MM-dd") + "'");
                         }
                     }
                 }

@@ -6,6 +6,7 @@ using DevExpress.ExpressApp.Xpo;
 using DevExpress.Xpo.DB;
 using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Copy_Screen;
+using OgawaPortal.Module.BusinessObjects.Logistic;
 using OgawaPortal.Module.BusinessObjects.Nonpersistent;
 using OgawaPortal.Module.BusinessObjects.POS___Exchange;
 using OgawaPortal.Module.BusinessObjects.POS___Logistic;
@@ -91,6 +92,22 @@ namespace OgawaPortal.Module.Controllers
                     this.ViewDoc.Active.SetItemValue("Enabled", true);
                 }
             }
+            /* CopyList_OGW11DREQ */
+            else if (View.ObjectTypeInfo.Type == typeof(CopyList_OGW11DREQ))
+            {
+                if (View.Id == "CopyList_OGW11DREQ_LookupListView")
+                {
+                    this.ViewDoc.Active.SetItemValue("Enabled", true);
+                }
+            }
+            /* CopyList_OGW11DREX */
+            else if (View.ObjectTypeInfo.Type == typeof(CopyList_OGW11DREX))
+            {
+                if (View.Id == "CopyList_OGW11DREX_LookupListView")
+                {
+                    this.ViewDoc.Active.SetItemValue("Enabled", true);
+                }
+            }
             /* OGW10ORDN */
             else if (View.ObjectTypeInfo.Type == typeof(OGW10ORDN))
             {
@@ -129,6 +146,57 @@ namespace OgawaPortal.Module.Controllers
             else if (View.ObjectTypeInfo.Type == typeof(OGW10DREQ))
             {
                 if (View.Id == "OGW10DREQ_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", false);
+                        this.CancelDoc.Active.SetItemValue("Enabled", false);
+                    }
+                    else
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", true);
+                        this.CancelDoc.Active.SetItemValue("Enabled", true);
+                    }
+                }
+            }
+            /* OGW10DREX */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                if (View.Id == "OGW10DREX_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", false);
+                        this.CancelDoc.Active.SetItemValue("Enabled", false);
+                    }
+                    else
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", true);
+                        this.CancelDoc.Active.SetItemValue("Enabled", true);
+                    }
+                }
+            }
+            /* OGW10OPKL */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                if (View.Id == "OGW10OPKL_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", false);
+                        this.CancelDoc.Active.SetItemValue("Enabled", false);
+                    }
+                    else
+                    {
+                        this.SubmitDoc.Active.SetItemValue("Enabled", true);
+                        this.CancelDoc.Active.SetItemValue("Enabled", true);
+                    }
+                }
+            }
+            /* OGW10PLEX */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                if (View.Id == "OGW10PLEX_DetailView")
                 {
                     if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
                     {
@@ -298,7 +366,7 @@ namespace OgawaPortal.Module.Controllers
 
                     /* Validation End */
 
-                    ORDR.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+                    ORDR.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
 
                     ORDR.SubmitBy = user.UserName;
                     ORDR.SubmitDate = DateTime.Now;
@@ -339,7 +407,7 @@ namespace OgawaPortal.Module.Controllers
 
                     /* Validation End */
 
-                    ORDN.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+                    ORDN.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
 
                     ORDN.SubmitBy = user.UserName;
                     ORDN.SubmitDate = DateTime.Now;
@@ -368,7 +436,7 @@ namespace OgawaPortal.Module.Controllers
 
                     /* Validation End */
 
-                    EXCO.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+                    EXCO.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
 
                     EXCO.SubmitBy = user.UserName;
                     EXCO.SubmitDate = DateTime.Now;
@@ -397,7 +465,7 @@ namespace OgawaPortal.Module.Controllers
 
                     /* Validation End */
 
-                    DREQ.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'OPEN'"));
+                    DREQ.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
 
                     DREQ.SubmitBy = user.UserName;
                     DREQ.SubmitDate = DateTime.Now;
@@ -406,6 +474,93 @@ namespace OgawaPortal.Module.Controllers
 
                     IObjectSpace os = Application.CreateObjectSpace();
                     OGW10DREQ trx = os.FindObject<OGW10DREQ>(new BinaryOperator("Oid", DREQ.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10DREX */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                try
+                {
+                    OGW10DREX DREX = (OGW10DREX)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    /* Validation End */
+
+                    DREX.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
+
+                    DREX.SubmitBy = user.UserName;
+                    DREX.SubmitDate = DateTime.Now;
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10DREX trx = os.FindObject<OGW10DREX>(new BinaryOperator("Oid", DREX.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10OPKL */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                try
+                {
+                    OGW10OPKL OPKL = (OGW10OPKL)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    /* Validation End */
+
+                    OPKL.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
+
+                    OPKL.SubmitBy = user.UserName;
+                    OPKL.SubmitDate = DateTime.Now;
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10OPKL trx = os.FindObject<OGW10OPKL>(new BinaryOperator("Oid", OPKL.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10PLEX */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                try
+                {
+                    OGW10PLEX PLEX = (OGW10PLEX)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    /* Validation End */
+
+                    PLEX.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'SUBMIT'"));
+
+                    PLEX.SubmitBy = user.UserName;
+                    PLEX.SubmitDate = DateTime.Now;
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10PLEX trx = os.FindObject<OGW10PLEX>(new BinaryOperator("Oid", PLEX.Oid));
                     genCon.openNewView(os, trx, ViewEditMode.View);
                     genCon.showMsg("Successful", "Document Submitted.", InformationType.Success);
                 }
@@ -551,6 +706,105 @@ namespace OgawaPortal.Module.Controllers
                     throw new InvalidOperationException(ex.Message);
                 }
             }
+
+            /* OGW10DREX */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                try
+                {
+                    OGW10DREX DREX = (OGW10DREX)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    //if (string.IsNullOrEmpty(DREQ.Reason))
+                    //    throw new InvalidOperationException("Unable to cancel without reason.");
+
+                    //if (DREQ.CancelType == null)
+                    //    throw new InvalidOperationException("Unable to cancel without cancel type.");
+
+                    /* Validation End */
+
+                    DREX.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'CANCEL'"));
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10DREX trx = os.FindObject<OGW10DREX>(new BinaryOperator("Oid", DREX.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10OPKL */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                try
+                {
+                    OGW10OPKL OPKL = (OGW10OPKL)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    //if (string.IsNullOrEmpty(DREQ.Reason))
+                    //    throw new InvalidOperationException("Unable to cancel without reason.");
+
+                    //if (DREQ.CancelType == null)
+                    //    throw new InvalidOperationException("Unable to cancel without cancel type.");
+
+                    /* Validation End */
+
+                    OPKL.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'CANCEL'"));
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10OPKL trx = os.FindObject<OGW10OPKL>(new BinaryOperator("Oid", OPKL.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+
+            /* OGW10PLEX */
+            if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                try
+                {
+                    OGW10PLEX PLEX = (OGW10PLEX)View.CurrentObject;
+
+                    /* Validation Start */
+
+                    //if (string.IsNullOrEmpty(DREQ.Reason))
+                    //    throw new InvalidOperationException("Unable to cancel without reason.");
+
+                    //if (DREQ.CancelType == null)
+                    //    throw new InvalidOperationException("Unable to cancel without cancel type.");
+
+                    /* Validation End */
+
+                    PLEX.Status = ObjectSpace.FindObject<vwStatus>(CriteriaOperator.Parse("Code = 'CANCEL'"));
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    OGW10PLEX trx = os.FindObject<OGW10PLEX>(new BinaryOperator("Oid", PLEX.Oid));
+                    genCon.openNewView(os, trx, ViewEditMode.View);
+                    genCon.showMsg("Successful", "Document Cancelled.", InformationType.Success);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
         }
 
         private void CloseDoc_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -606,6 +860,34 @@ namespace OgawaPortal.Module.Controllers
                 OGW10ORDR trx = os.FindObject<OGW10ORDR>(new BinaryOperator("DocNum", view.Header.DocNum));
 
                 DetailView detailView = Application.CreateDetailView(os, "OGW10ORDR_DetailView_View", true, trx);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+                e.View = detailView;
+                e.Maximized = true;
+                e.DialogController.CancelAction.Active["NothingToCancel"] = false;
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(CopyList_OGW11DREQ))
+            {
+                CopyList_OGW11DREQ view = (CopyList_OGW11DREQ)View.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                OGW10DREQ trx = os.FindObject<OGW10DREQ>(new BinaryOperator("DocNum", view.Header.DocNum));
+
+                DetailView detailView = Application.CreateDetailView(os, "OGW10DREQ_DetailView_View", true, trx);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+                e.View = detailView;
+                e.Maximized = true;
+                e.DialogController.CancelAction.Active["NothingToCancel"] = false;
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(CopyList_OGW11DREX))
+            {
+                CopyList_OGW11DREX view = (CopyList_OGW11DREX)View.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                OGW10DREX trx = os.FindObject<OGW10DREX>(new BinaryOperator("DocNum", view.Header.DocNum));
+
+                DetailView detailView = Application.CreateDetailView(os, "OGW10DREX_DetailView_View", true, trx);
                 detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
                 e.View = detailView;
                 e.Maximized = true;

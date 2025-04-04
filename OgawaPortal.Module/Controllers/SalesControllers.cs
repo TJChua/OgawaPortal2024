@@ -4,6 +4,7 @@ using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.Editors;
 using OgawaPortal.Module.BusinessObjects;
 using OgawaPortal.Module.BusinessObjects.Copy_Screen;
+using OgawaPortal.Module.BusinessObjects.Logistic;
 using OgawaPortal.Module.BusinessObjects.Maintenance;
 using OgawaPortal.Module.BusinessObjects.POS___Exchange;
 using OgawaPortal.Module.BusinessObjects.POS___Logistic;
@@ -27,6 +28,8 @@ namespace OgawaPortal.Module.Controllers
             base.OnActivated();
             this.DeleteORDRLine.Active.SetItemValue("Enabled", false);
             this.CopyFrmSO.Active.SetItemValue("Enabled", false);
+            this.CopyFrmDR.Active.SetItemValue("Enabled", false);
+            this.CopyFrmDREX.Active.SetItemValue("Enabled", false);
             this.ResumeDoc.Active.SetItemValue("Enabled", false);
 
             ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
@@ -122,10 +125,57 @@ namespace OgawaPortal.Module.Controllers
                     }
                 }
             }
+            /* OGW10DREX */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                if (View.Id == "OGW10DREX_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.CopyFrmSO.Active.SetItemValue("Enabled", true);
+                    }
+                    else
+                    {
+                        this.CopyFrmSO.Active.SetItemValue("Enabled", false);
+                    }
+                }
+            }
+            /* OGW10OPKL */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                if (View.Id == "OGW10OPKL_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.CopyFrmDR.Active.SetItemValue("Enabled", true);
+                    }
+                    else
+                    {
+                        this.CopyFrmDR.Active.SetItemValue("Enabled", false);
+                    }
+                }
+            }
+            /* OGW10PLEX */
+            else if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                if (View.Id == "OGW10PLEX_DetailView")
+                {
+                    if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
+                    {
+                        this.CopyFrmDREX.Active.SetItemValue("Enabled", true);
+                    }
+                    else
+                    {
+                        this.CopyFrmDREX.Active.SetItemValue("Enabled", false);
+                    }
+                }
+            }
             else
             {
                 this.DeleteORDRLine.Active.SetItemValue("Enabled", false);
                 this.CopyFrmSO.Active.SetItemValue("Enabled", false);
+                this.CopyFrmDR.Active.SetItemValue("Enabled", false);
+                this.CopyFrmDREX.Active.SetItemValue("Enabled", false);
                 this.ResumeDoc.Active.SetItemValue("Enabled", false);
             }
 
@@ -721,6 +771,146 @@ namespace OgawaPortal.Module.Controllers
                     throw new InvalidOperationException(ex.Message);
                 }
             }
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                try
+                {
+                    int row = 0;
+                    OGW10DREX DREX = (OGW10DREX)View.CurrentObject;
+
+                    foreach (CopyList_OGW11ORDR dtl in ((ListView)e.PopupWindow.View).SelectedObjects)
+                    {
+                        if (dtl.Header.BillName != null)
+                        {
+                            DREX.BillName = DREX.Session.GetObjectByKey<Customer>(dtl.Header.BillName.Oid);
+                        }
+                        DREX.BillAddress1 = dtl.Header.BillAddress1;
+                        DREX.BillAddress2 = dtl.Header.BillAddress2;
+                        DREX.BillCity = dtl.Header.BillCity;
+                        DREX.BillDistrict = dtl.Header.BillDistrict;
+                        DREX.BillPostCode = dtl.Header.BillPostCode;
+                        DREX.BillCountry = dtl.Header.BillCountry;
+                        DREX.BillMobilePhone = dtl.Header.BillMobilePhone;
+                        DREX.BillHomePhone = dtl.Header.BillHomePhone;
+                        DREX.BillEmail = dtl.Header.BillEmail;
+                        DREX.BillIdentityNo = dtl.Header.BillIdentityNo;
+                        if (DREX.BillRace != null)
+                        {
+                            DREX.BillRace = DREX.Session.GetObjectByKey<Races>(DREX.BillRace.Oid);
+                        }
+
+                        if (DREX.DeliveryContact != null)
+                        {
+                            DREX.DeliveryContact = DREX.Session.GetObjectByKey<Customer>(dtl.Header.DeliveryContact.Oid);
+                        }
+                        DREX.DeliveryAddress1 = dtl.Header.DeliveryAddress1;
+                        DREX.DeliveryAddress2 = dtl.Header.DeliveryAddress2;
+                        DREX.DeliveryCity = dtl.Header.DeliveryCity;
+                        DREX.DeliveryDistrict = dtl.Header.DeliveryDistrict;
+                        DREX.DeliveryPostCode = dtl.Header.DeliveryPostCode;
+                        DREX.DeliveryCountry = dtl.Header.DeliveryCountry;
+                        DREX.DeliveryMobilePhone = dtl.Header.DeliveryMobilePhone;
+                        DREX.DeliveryHomePhone = dtl.Header.DeliveryHomePhone;
+                        if (dtl.Header.DeliveryRace != null)
+                        {
+                            DREX.DeliveryRace = DREX.Session.GetObjectByKey<Races>(dtl.Header.DeliveryRace.Oid);
+                        }
+
+                        DREX.SubTotal = dtl.Header.SubTotal;
+                        DREX.OrderDiscount = dtl.Header.OrderDiscount;
+                        DREX.Tax = dtl.Header.Tax;
+                        DREX.TotalDue = dtl.Header.TotalDue;
+                        DREX.SettlementDiscount = dtl.Header.SettlementDiscount;
+                        DREX.NetTotalDue = dtl.Header.NetTotalDue;
+                        DREX.Cash = dtl.Header.Cash;
+                        DREX.CreditCard = dtl.Header.CreditCard;
+                        DREX.Voucher = dtl.Header.Voucher;
+                        DREX.CreditNote = dtl.Header.CreditNote;
+                        DREX.PreviousPayment = dtl.Header.PreviousPayment;
+                        DREX.OrderBalanceDue = dtl.Header.OrderBalanceDue;
+                        DREX.MinimumDue = dtl.Header.MinimumDue;
+                        DREX.MinDueBalance = dtl.Header.MinDueBalance;
+
+                        foreach (OGW11ORDR item in dtl.Header.OGW11ORDR)
+                        {
+                            OGW11DREX DREX11 = new OGW11DREX(DREX.Session);
+
+                            DREX11.Class = item.Class;
+                            DREX11.ItemCode = DREX11.Session.GetObjectByKey<vwItemMasters>(item.ItemCode.ItemCode);
+                            DREX11.ItemName = item.ItemName;
+                            DREX11.UnitPrice = item.UnitPrice;
+                            DREX11.Order = item.UnitPrice;
+                            DREX11.Taken = item.Taken;
+                            DREX11.BackOrder = item.BackOrder;
+                            DREX11.BaseEntry = item.DocEntry.Oid;
+                            DREX11.BaseOid = item.Oid;
+
+                            DREX.OGW11DREX.Add(DREX11);
+                        }
+
+                        foreach (OGW12ORDR payment in dtl.Header.OGW12ORDR)
+                        {
+                            OGW12DREX DREX12 = new OGW12DREX(DREX.Session);
+
+                            DREX12.PaymentMethod = payment.PaymentMethod;
+                            DREX12.CashAcctCode = payment.CashAcctCode;
+                            if (payment.Consignment != null)
+                            {
+                                DREX12.Consignment = DREX12.Session.GetObjectByKey<Consignment>(payment.Consignment.Oid);
+                            }
+                            DREX12.CashAmount = payment.CashAmount;
+                            DREX12.CashRefNum = payment.CashRefNum;
+                            DREX12.CreditCardAcctCode = payment.CreditCardAcctCode;
+                            if (payment.CardType != null)
+                            {
+                                DREX12.CardType = DREX12.Session.GetObjectByKey<CardType>(payment.CardType.Oid);
+                            }
+                            DREX12.CreditCardNo = payment.CreditCardNo;
+                            DREX12.CardHolderName = payment.CardHolderName;
+                            if (payment.Instalment != null)
+                            {
+                                DREX12.Instalment = DREX12.Session.GetObjectByKey<Instalment>(payment.Instalment.Oid);
+                            }
+                            DREX12.TerminalID = payment.TerminalID;
+                            if (payment.CardIssuer != null)
+                            {
+                                DREX12.CardIssuer = DREX12.Session.GetObjectByKey<CardIssuer>(payment.CardIssuer.Oid);
+                            }
+                            if (payment.Merchant != null)
+                            {
+                                DREX12.Merchant = DREX12.Session.GetObjectByKey<CardMachineBank>(payment.Merchant.Oid);
+                            }
+                            DREX12.ApprovalCode = payment.ApprovalCode;
+                            DREX12.BatchNo = payment.BatchNo;
+                            DREX12.Transaction = payment.Transaction;
+                            DREX12.CreditCardAmount = payment.CreditCardAmount;
+                            DREX12.VoucherAcctCode = payment.VoucherAcctCode;
+                            if (payment.VoucherType != null)
+                            {
+                                DREX12.VoucherType = DREX12.Session.GetObjectByKey<Voucher>(payment.VoucherType.Oid);
+                            }
+                            DREX12.VoucherNo = payment.VoucherNo;
+                            if (payment.TaxCode != null)
+                            {
+                                DREX12.TaxCode = DREX12.Session.GetObjectByKey<vwTax>(payment.TaxCode.Code);
+                            }
+                            DREX12.VoucherAmount = payment.VoucherAmount;
+                            DREX12.PaymentTotal = payment.PaymentTotal;
+                            DREX12.BaseEntry = payment.DocEntry.Oid;
+                            DREX12.BaseOid = payment.Oid;
+
+                            DREX.OGW12DREX.Add(DREX12);
+                        }
+                    }
+
+                    ObjectSpace.CommitChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
         }
 
         private void CopyFrmSO_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
@@ -872,6 +1062,42 @@ namespace OgawaPortal.Module.Controllers
 
                 e.View = Application.CreateListView(listViewId, collectionSource, true);
             }
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10DREX))
+            {
+                OGW10DREX DREX = (OGW10DREX)View.CurrentObject;
+
+                //Customer = DREQ.Name != null ? DREQ.Name.Oid.ToString() : "";
+
+                IObjectSpace os = Application.CreateObjectSpace(typeof(CopyList_OGW11ORDR));
+                string listViewId = Application.FindLookupListViewId(typeof(CopyList_OGW11ORDR));
+                CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(CopyList_OGW11ORDR), listViewId);
+
+                using (SqlConnection conn = new SqlConnection(genCon.getConnectionString()))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter("", conn))
+                    {
+                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10ORDR', 'OGW10DREX', '" + Customer + "' ";
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dtrow in dt.Rows)
+                            {
+                                CopyList_OGW11ORDR SO = os.CreateObject<CopyList_OGW11ORDR>();
+
+                                SO.Oid = int.Parse(dtrow["Oid"].ToString());
+                                SO.Header = ObjectSpace.GetObjectByKey<OGW10ORDR>(dtrow["Header"]);
+                                //SO.Details = ObjectSpace.GetObjectByKey<OGW11ORDR>(dtrow["Details"]);
+                                collectionSource.List.Add(SO);
+                            }
+                        }
+                    }
+                }
+
+                e.View = Application.CreateListView(listViewId, collectionSource, true);
+            }
         }
 
         private void ResumeDoc_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -909,6 +1135,202 @@ namespace OgawaPortal.Module.Controllers
                 {
                     throw new InvalidOperationException(ex.Message);
                 }
+            }
+        }
+
+        private void CopyFrmDR_Execute(object sender, PopupWindowShowActionExecuteEventArgs e)
+        {
+            if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                try
+                {
+                    int row = 0;
+                    OGW10OPKL OPKL = (OGW10OPKL)View.CurrentObject;
+
+                    foreach (CopyList_OGW11DREQ dtl in ((ListView)e.PopupWindow.View).SelectedObjects)
+                    {
+                        if (OPKL.DeliveryContact != null)
+                        {
+                            OPKL.DeliveryContact = OPKL.Session.GetObjectByKey<Customer>(dtl.Header.DeliveryContact.Oid);
+                        }
+                        OPKL.DeliveryAddress1 = dtl.Header.DeliveryAddress1;
+                        OPKL.DeliveryAddress2 = dtl.Header.DeliveryAddress2;
+                        OPKL.DeliveryCity = dtl.Header.DeliveryCity;
+                        OPKL.DeliveryDistrict = dtl.Header.DeliveryDistrict;
+                        OPKL.DeliveryPostCode = dtl.Header.DeliveryPostCode;
+                        OPKL.DeliveryCountry = dtl.Header.DeliveryCountry;
+                        OPKL.DeliveryMobilePhone = dtl.Header.DeliveryMobilePhone;
+                        OPKL.DeliveryHomePhone = dtl.Header.DeliveryHomePhone;
+                        if (dtl.Header.DeliveryRace != null)
+                        {
+                            OPKL.DeliveryRace = OPKL.Session.GetObjectByKey<Races>(dtl.Header.DeliveryRace.Oid);
+                        }
+
+                        foreach (OGW11DREQ item in dtl.Header.OGW11DREQ)
+                        {
+                            OGW11OPKL OPKL11 = new OGW11OPKL(OPKL.Session);
+
+                            OPKL11.Class = item.Class;
+                            OPKL11.ItemCode = OPKL11.Session.GetObjectByKey<vwItemMasters>(item.ItemCode.ItemCode);
+                            OPKL11.ItemName = item.ItemName;
+                            OPKL11.UnitPrice = item.UnitPrice;
+                            OPKL11.Order = item.UnitPrice;
+                            OPKL11.Taken = item.Taken;
+                            OPKL11.BackOrder = item.BackOrder;
+                            OPKL11.BaseEntry = item.DocEntry.Oid;
+                            OPKL11.BaseOid = item.Oid;
+
+                            OPKL.OGW11OPKL.Add(OPKL11);
+                        }
+                    }
+
+                    ObjectSpace.CommitChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+        }
+
+        private void CopyFrmDR_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
+        {
+            var Customer = "";
+            var ObjType = "";
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10OPKL))
+            {
+                OGW10OPKL OPKL = (OGW10OPKL)View.CurrentObject;
+
+                //Customer = ORDR.Name != null ? ORDR.Name.Oid.ToString() : "";
+                //ObjType = "EditOrder";
+
+                IObjectSpace os = Application.CreateObjectSpace(typeof(CopyList_OGW11DREQ));
+                string listViewId = Application.FindLookupListViewId(typeof(CopyList_OGW11DREQ));
+                CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(CopyList_OGW11DREQ), listViewId);
+
+                using (SqlConnection conn = new SqlConnection(genCon.getConnectionString()))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter("", conn))
+                    {
+                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10DREQ', '" + ObjType + "', '" + Customer + "' ";
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dtrow in dt.Rows)
+                            {
+                                CopyList_OGW11DREQ DREQ = os.CreateObject<CopyList_OGW11DREQ>();
+
+                                DREQ.Oid = int.Parse(dtrow["Oid"].ToString());
+                                DREQ.Header = ObjectSpace.GetObjectByKey<OGW10DREQ>(dtrow["Header"]);
+                                //SO.Details = ObjectSpace.GetObjectByKey<OGW11ORDR>(dtrow["Details"]);
+                                collectionSource.List.Add(DREQ);
+                            }
+                        }
+                    }
+                }
+
+                e.View = Application.CreateListView(listViewId, collectionSource, true);
+            }
+        }
+
+        private void CopyFrmDREX_Execute(object sender, PopupWindowShowActionExecuteEventArgs e)
+        {
+            if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                try
+                {
+                    int row = 0;
+                    OGW10PLEX PLEX = (OGW10PLEX)View.CurrentObject;
+
+                    foreach (CopyList_OGW11DREX dtl in ((ListView)e.PopupWindow.View).SelectedObjects)
+                    {
+                        if (PLEX.DeliveryContact != null)
+                        {
+                            PLEX.DeliveryContact = PLEX.Session.GetObjectByKey<Customer>(dtl.Header.DeliveryContact.Oid);
+                        }
+                        PLEX.DeliveryAddress1 = dtl.Header.DeliveryAddress1;
+                        PLEX.DeliveryAddress2 = dtl.Header.DeliveryAddress2;
+                        PLEX.DeliveryCity = dtl.Header.DeliveryCity;
+                        PLEX.DeliveryDistrict = dtl.Header.DeliveryDistrict;
+                        PLEX.DeliveryPostCode = dtl.Header.DeliveryPostCode;
+                        PLEX.DeliveryCountry = dtl.Header.DeliveryCountry;
+                        PLEX.DeliveryMobilePhone = dtl.Header.DeliveryMobilePhone;
+                        PLEX.DeliveryHomePhone = dtl.Header.DeliveryHomePhone;
+                        if (dtl.Header.DeliveryRace != null)
+                        {
+                            PLEX.DeliveryRace = PLEX.Session.GetObjectByKey<Races>(dtl.Header.DeliveryRace.Oid);
+                        }
+
+                        foreach (OGW11DREX item in dtl.Header.OGW11DREX)
+                        {
+                            OGW11PLEX PLEX11 = new OGW11PLEX(PLEX.Session);
+
+                            PLEX11.Class = item.Class;
+                            PLEX11.ItemCode = PLEX11.Session.GetObjectByKey<vwItemMasters>(item.ItemCode.ItemCode);
+                            PLEX11.ItemName = item.ItemName;
+                            PLEX11.UnitPrice = item.UnitPrice;
+                            PLEX11.Order = item.UnitPrice;
+                            PLEX11.Taken = item.Taken;
+                            PLEX11.BackOrder = item.BackOrder;
+                            PLEX11.BaseEntry = item.DocEntry.Oid;
+                            PLEX11.BaseOid = item.Oid;
+
+                            PLEX.OGW11PLEX.Add(PLEX11);
+                        }
+                    }
+
+                    ObjectSpace.CommitChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+        }
+
+        private void CopyFrmDREX_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
+        {
+            var Customer = "";
+            var ObjType = "";
+
+            if (View.ObjectTypeInfo.Type == typeof(OGW10PLEX))
+            {
+                OGW10PLEX PLEX = (OGW10PLEX)View.CurrentObject;
+
+                //Customer = ORDR.Name != null ? ORDR.Name.Oid.ToString() : "";
+                //ObjType = "EditOrder";
+
+                IObjectSpace os = Application.CreateObjectSpace(typeof(CopyList_OGW11DREX));
+                string listViewId = Application.FindLookupListViewId(typeof(CopyList_OGW11DREX));
+                CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(CopyList_OGW11DREX), listViewId);
+
+                using (SqlConnection conn = new SqlConnection(genCon.getConnectionString()))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter("", conn))
+                    {
+                        da.SelectCommand.CommandText = "EXEC FTS_sp_CopyFrom 'OGW10PLEX', '" + ObjType + "', '" + Customer + "' ";
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dtrow in dt.Rows)
+                            {
+                                CopyList_OGW11DREX DREX = os.CreateObject<CopyList_OGW11DREX>();
+
+                                DREX.Oid = int.Parse(dtrow["Oid"].ToString());
+                                DREX.Header = ObjectSpace.GetObjectByKey<OGW10DREX>(dtrow["Header"]);
+                                //SO.Details = ObjectSpace.GetObjectByKey<OGW11ORDR>(dtrow["Details"]);
+                                collectionSource.List.Add(DREX);
+                            }
+                        }
+                    }
+                }
+
+                e.View = Application.CreateListView(listViewId, collectionSource, true);
             }
         }
     }

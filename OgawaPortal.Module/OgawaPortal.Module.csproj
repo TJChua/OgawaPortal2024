@@ -115,8 +115,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Copy Screen\CopyList_OGW11DREQ.cs" />
+    <Compile Include="BusinessObjects\Copy Screen\CopyList_OGW11DREX.cs" />
     <Compile Include="BusinessObjects\Copy Screen\CopyList_OGW11ORDR.cs" />
     <Compile Include="BusinessObjects\GeneralValue.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW10OPKL.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW10PLEX.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW11OPKL.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW11PLEX.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW13OPKL.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW13PLEX.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW15OPKL.cs" />
+    <Compile Include="BusinessObjects\Logistic\OGW15PLEX.cs" />
     <Compile Include="BusinessObjects\Maintenance\CancelType.cs" />
     <Compile Include="BusinessObjects\Maintenance\CardIssuer.cs" />
     <Compile Include="BusinessObjects\Maintenance\CardMachineBank.cs" />
@@ -154,9 +164,12 @@
     <Compile Include="BusinessObjects\POS - Logistic\OGW10DREQ.cs" />
     <Compile Include="BusinessObjects\POS - Logistic\OGW10DREX.cs" />
     <Compile Include="BusinessObjects\POS - Logistic\OGW11DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW11DREX.cs" />
     <Compile Include="BusinessObjects\POS - Logistic\OGW12DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW12DREX.cs" />
     <Compile Include="BusinessObjects\POS - Logistic\OGW13DREQ.cs" />
     <Compile Include="BusinessObjects\POS - Logistic\OGW15DREQ.cs" />
+    <Compile Include="BusinessObjects\POS - Logistic\OGW15DREX.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW10ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW11ORDR.cs" />
     <Compile Include="BusinessObjects\Sales Order\OGW12ORDR.cs" />

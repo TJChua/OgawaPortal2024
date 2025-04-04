@@ -8,7 +8,7 @@ using System;
 
 namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
 {
-    [XafDisplayName("Proof of Document")]
+    [XafDisplayName("Delivery Request Proof of Document")]
     [Appearance("DREQAttachments1", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("DREQAttachments2", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
 

@@ -2,23 +2,19 @@
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
 using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
-using OgawaPortal.Module.BusinessObjects.View;
 using System;
 
-
-namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
+namespace OgawaPortal.Module.BusinessObjects.Logistic
 {
-    [Appearance("DREQDocStatuses1", AppearanceItemType = "Action", TargetItems = "New", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses2", AppearanceItemType = "Action", TargetItems = "Edit", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses3", AppearanceItemType = "Action", TargetItems = "Link", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses4", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [Appearance("DREQDocStatuses5", AppearanceItemType = "Action", TargetItems = "Delete", Context = "Any", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
-    [XafDisplayName("DREQ Document Trail")]
+    [XafDisplayName("Pick List Proof of Document")]
+    [Appearance("OPKLAttachments1", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
+    [Appearance("OPKLAttachments2", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
 
-    public class OGW15DREQ : XPObject
-    { 
-        public OGW15DREQ(Session session)
+    public class OGW13OPKL : FileAttachmentBase
+    {
+        public OGW13OPKL(Session session)
             : base(session)
         {
         }
@@ -29,11 +25,11 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
             CreateDate = DateTime.Now;
         }
 
-        private OGW10DREQ _DocEntry;
-        [Association("OGW10DREQ-OGW15DREQ")]
-        [Index(0), VisibleInListView(false), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        private OGW10OPKL _DocEntry;
+        [Association("OGW10OPKL-OGW13OPKL")]
+        [Index(0), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
         [Appearance("DocEntry", Enabled = false)]
-        public OGW10DREQ DocEntry
+        public OGW10OPKL DocEntry
         {
             get { return _DocEntry; }
             set { SetPropertyValue("DocEntry", ref _DocEntry, value); }
@@ -85,23 +81,8 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
             }
         }
 
-        private vwStatus _Status;
-        [XafDisplayName("Status")]
-        [NoForeignKey]
-        [Index(10), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
-        [Appearance("Status", Enabled = false)]
-        public vwStatus Status
-        {
-            get { return _Status; }
-            set
-            {
-                SetPropertyValue("Status", ref _Status, value);
-            }
-        }
         private string _Remarks;
-        [XafDisplayName("Remarks")]
-        [Appearance("Remarks", Enabled = false)]
-        [Index(11), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        [Index(10), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         public string Remarks
         {
             get { return _Remarks; }
@@ -121,11 +102,6 @@ namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
             {
                 UpdateUser = Session.GetObjectByKey<ApplicationUser>(SecuritySystem.CurrentUserId).UserName;
                 UpdateDate = DateTime.Now;
-
-                if (Session.IsNewObject(this))
-                {
-
-                }
             }
         }
     }

@@ -27,7 +27,8 @@
         </Items>
       </Item>
       <Item Id="POS - Logistic" Index="5" />
-      <Item Id="SAP" Index="6" />
+      <Item Id="Logistic" Index="6" />
+      <Item Id="SAP" Index="7" />
     </Items>
   </NavigationItems>
   <Options CollectionsEditMode="Edit" />
@@ -76,14 +77,35 @@
         <ColumnInfo Id="Code" SortIndex="-1" SortOrder="None" />
       </Columns>
     </ListView>
+    <DetailView Id="CopyList_OGW11DREQ_DetailView" AllowEdit="False" />
+    <ListView Id="CopyList_OGW11DREQ_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Header" Index="-1" />
+        <ColumnInfo Id="Header.Remarks" PropertyName="Header.Remarks" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Header.DocNum" PropertyName="Header.DocNum" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Header.DeliveryReqDate" PropertyName="Header.DeliveryReqDate" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Header.BaseRefNo" PropertyName="Header.BaseRefNo" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Header.FullPayment" PropertyName="Header.FullPayment" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Header.Status" PropertyName="Header.Status" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="CopyList_OGW11DREX_DetailView" AllowEdit="False" />
+    <ListView Id="CopyList_OGW11DREX_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Header.DocNum" PropertyName="Header.DocNum" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Header.DeliveryRequestDate" PropertyName="Header.DeliveryRequestDate" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Header.BaseRefNo" PropertyName="Header.BaseRefNo" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Header.Status" PropertyName="Header.Status" Index="3" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <DetailView Id="CopyList_OGW11ORDR_DetailView" AllowEdit="False" />
     <ListView Id="CopyList_OGW11ORDR_LookupListView" ShowAutoFilterRow="False">
       <Columns>
         <ColumnInfo Id="Header" Index="-1" />
-        <ColumnInfo Id="Header.DocNum" PropertyName="Header.DocNum" Index="0" IsNewNode="True" />
-        <ColumnInfo Id="Header.SalesOrderDate" PropertyName="Header.SalesOrderDate" Index="1" IsNewNode="True" />
-        <ColumnInfo Id="Header.SalesRefNo" PropertyName="Header.SalesRefNo" Index="2" IsNewNode="True" />
-        <ColumnInfo Id="Header.Reason" PropertyName="Header.Reason" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Header.DocNum" PropertyName="Header.DocNum" Index="0" Width="159" IsNewNode="True" />
+        <ColumnInfo Id="Header.SalesOrderDate" PropertyName="Header.SalesOrderDate" Index="1" Width="111" IsNewNode="True" />
+        <ColumnInfo Id="Header.SalesRefNo" PropertyName="Header.SalesRefNo" Index="2" Width="124" IsNewNode="True" />
+        <ColumnInfo Id="Header.Reason" PropertyName="Header.Reason" Index="3" Width="111" IsNewNode="True" />
         <ColumnInfo Id="Header.Status" PropertyName="Header.Status" Index="4" IsNewNode="True" />
       </Columns>
     </ListView>
@@ -304,6 +326,430 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <DetailView Id="OGW10DREQ_DetailView_View" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="OgawaPortal.Module.BusinessObjects.POS___Logistic.OGW10DREQ" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="OGW10DREQ_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="BaseNum" PropertyName="BaseNum" IsNewNode="True" />
+        <PropertyEditor Id="BaseRefNo" PropertyName="BaseRefNo" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress1" PropertyName="BillAddress1" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress2" PropertyName="BillAddress2" IsNewNode="True" />
+        <PropertyEditor Id="BillCity" PropertyName="BillCity" IsNewNode="True" />
+        <PropertyEditor Id="BillCountry" PropertyName="BillCountry" IsNewNode="True" />
+        <PropertyEditor Id="BillDistrict" PropertyName="BillDistrict" IsNewNode="True" />
+        <PropertyEditor Id="BillEmail" PropertyName="BillEmail" IsNewNode="True" />
+        <PropertyEditor Id="BillHomePhone" PropertyName="BillHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillIdentityNo" PropertyName="BillIdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="BillMobilePhone" PropertyName="BillMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillName" PropertyName="BillName" IsNewNode="True" />
+        <PropertyEditor Id="BillPostCode" PropertyName="BillPostCode" IsNewNode="True" />
+        <PropertyEditor Id="BillRace" PropertyName="BillRace" IsNewNode="True" />
+        <PropertyEditor Id="Cash" PropertyName="Cash" IsNewNode="True" />
+        <PropertyEditor Id="CreateDate" PropertyName="CreateDate" IsNewNode="True" />
+        <PropertyEditor Id="CreateUser" PropertyName="CreateUser" IsNewNode="True" />
+        <PropertyEditor Id="CreditCard" PropertyName="CreditCard" IsNewNode="True" />
+        <PropertyEditor Id="CreditNote" PropertyName="CreditNote" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress1" PropertyName="DeliveryAddress1" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress2" PropertyName="DeliveryAddress2" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCity" PropertyName="DeliveryCity" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryContact" PropertyName="DeliveryContact" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCountry" PropertyName="DeliveryCountry" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryDistrict" PropertyName="DeliveryDistrict" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPostCode" PropertyName="DeliveryPostCode" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryRace" PropertyName="DeliveryRace" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryReqDate" PropertyName="DeliveryReqDate" IsNewNode="True" />
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+        <PropertyEditor Id="DocNum" PropertyName="DocNum" IsNewNode="True" />
+        <PropertyEditor Id="DRRefNo" PropertyName="DRRefNo" IsNewNode="True" />
+        <PropertyEditor Id="FullPayment" PropertyName="FullPayment" IsNewNode="True" />
+        <PropertyEditor Id="MinDueBalance" PropertyName="MinDueBalance" IsNewNode="True" />
+        <PropertyEditor Id="MinimumDue" PropertyName="MinimumDue" IsNewNode="True" />
+        <PropertyEditor Id="NetTotalDue" PropertyName="NetTotalDue" IsNewNode="True" />
+        <PropertyEditor Id="ObjType" PropertyName="ObjType" IsNewNode="True" />
+        <PropertyEditor Id="OGW11DREQ" PropertyName="OGW11DREQ" View="OGW10DREQ_OGW11DREQ_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW12DREQ" PropertyName="OGW12DREQ" View="OGW10DREQ_OGW12DREQ_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW13DREQ" PropertyName="OGW13DREQ" View="OGW10DREQ_OGW13DREQ_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW15DREQ" PropertyName="OGW15DREQ" View="OGW10DREQ_OGW15DREQ_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="OrderBalanceDue" PropertyName="OrderBalanceDue" IsNewNode="True" />
+        <PropertyEditor Id="OrderDiscount" PropertyName="OrderDiscount" IsNewNode="True" />
+        <PropertyEditor Id="PreviousPayment" PropertyName="PreviousPayment" IsNewNode="True" />
+        <PropertyEditor Id="Remarks" PropertyName="Remarks" IsNewNode="True" />
+        <PropertyEditor Id="SettlementDiscount" PropertyName="SettlementDiscount" IsNewNode="True" />
+        <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
+        <PropertyEditor Id="SubmitBy" PropertyName="SubmitBy" IsNewNode="True" />
+        <PropertyEditor Id="SubmitDate" PropertyName="SubmitDate" IsNewNode="True" />
+        <PropertyEditor Id="SubTotal" PropertyName="SubTotal" IsNewNode="True" />
+        <PropertyEditor Id="Tax" PropertyName="Tax" IsNewNode="True" />
+        <PropertyEditor Id="TotalDue" PropertyName="TotalDue" IsNewNode="True" />
+        <PropertyEditor Id="TotalPayment" PropertyName="TotalPayment" IsNewNode="True" />
+        <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Voucher" PropertyName="Voucher" IsNewNode="True" />
+        <PropertyEditor Id="Warehouse" PropertyName="Warehouse" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="21.32564841498559" IsNewNode="True">
+            <LayoutGroup Id="OGW10DREQ_col1" ShowCaption="False" Index="0" RelativeSize="43.741588156123825" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="24.324324324324323" IsNewNode="True" />
+              <LayoutItem Id="DeliveryReqDate" ViewItem="DeliveryReqDate" Index="1" RelativeSize="17.567567567567568" IsNewNode="True" />
+              <LayoutItem Id="DRRefNo" ViewItem="DRRefNo" Index="2" RelativeSize="17.567567567567568" IsNewNode="True" />
+              <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="3" RelativeSize="17.567567567567568" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="4" RelativeSize="22.972972972972972" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autoca6b3039-94f6-4b4b-a000-544da61fc4d4" ShowCaption="False" Caption="Autoca6b3039-94f6-4b4b-a000-544da61fc4d4(9)" Index="1" RelativeSize="39.030955585464334" IsNewNode="True">
+              <LayoutItem Id="FullPayment" ViewItem="FullPayment" Index="0" RelativeSize="22.972972972972972" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="17.567567567567568" IsNewNode="True" />
+              <LayoutItem Id="BaseNum" ViewItem="BaseNum" Index="2" RelativeSize="17.567567567567568" IsNewNode="True" />
+              <LayoutItem Id="BaseRefNo" ViewItem="BaseRefNo" Index="3" RelativeSize="41.891891891891895" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="2" RelativeSize="17.227456258411845" IsNewNode="True" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="53.602305475504323" IsNewNode="True">
+            <LayoutGroup Id="OGW11DREQ" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW11DREQ" ViewItem="OGW11DREQ" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW13DREQ" Index="1" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW13DREQ" ViewItem="OGW13DREQ" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW12DREQ" Index="2" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW12DREQ" ViewItem="OGW12DREQ" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="3" RelativeSize="100" Caption="Billing Info" IsNewNode="True">
+              <LayoutItem Id="BillName" ViewItem="BillName" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="BillAddress1" ViewItem="BillAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillAddress2" ViewItem="BillAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCity" ViewItem="BillCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillDistrict" ViewItem="BillDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillPostCode" ViewItem="BillPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCountry" ViewItem="BillCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillMobilePhone" ViewItem="BillMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillHomePhone" ViewItem="BillHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillEmail" ViewItem="BillEmail" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillIdentityNo" ViewItem="BillIdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillRace" ViewItem="BillRace" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="4" RelativeSize="100" Caption="Delivery Info" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="26.506024096385541" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW15DREQ" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW15DREQ" ViewItem="OGW15DREQ" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" Index="6" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="Autobb97bcb2-31cc-4de4-bcb8-eeb8749d8f50" ShowCaption="False" Caption="Autobb97bcb2-31cc-4de4-bcb8-eeb8749d8f50(51)" Direction="Horizontal" Index="2" RelativeSize="25.072046109510087" IsNewNode="True">
+            <LayoutGroup Id="Auto6476b321-76a4-4475-b975-0048ffb37c84" ShowCaption="False" Caption="Auto6476b321-76a4-4475-b975-0048ffb37c84(52)" Index="0" RelativeSize="49.798115746971739" IsNewNode="True">
+              <LayoutItem Id="Cash" ViewItem="Cash" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="CreditCard" ViewItem="CreditCard" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Voucher" ViewItem="Voucher" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="CreditNote" ViewItem="CreditNote" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto238ec242-e260-48b8-8f25-3a25f03c09ae" ShowCaption="False" Caption="Auto238ec242-e260-48b8-8f25-3a25f03c09ae(59)" Index="1" RelativeSize="50.201884253028261" IsNewNode="True">
+              <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Tax" ViewItem="Tax" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OGW10DREX_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="18.263473053892216" Direction="Horizontal">
+            <LayoutGroup Id="OGW10DREX_col1" ShowCaption="False" Index="0" RelativeSize="43.221476510067113" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRequestDate" ViewItem="DeliveryRequestDate" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="BaseDate" ViewItem="BaseDate" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto9c2d6550-c278-4ff6-bb68-d8468dab00bb" ShowCaption="False" Caption="Auto9c2d6550-c278-4ff6-bb68-d8468dab00bb(9)" Index="1" RelativeSize="39.597315436241608" IsNewNode="True">
+              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="BaseRefNo" ViewItem="BaseRefNo" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="BaseNum" ViewItem="BaseNum" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="2" RelativeSize="17.181208053691275" IsNewNode="True" />
+            <LayoutGroup Id="OGW10DREX" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="Auto9c2d6550-c278-4ff6-bb68-d8468dab00bb" ShowCaption="False" Caption="Auto9c2d6550-c278-4ff6-bb68-d8468dab00bb(9)" Index="1" RelativeSize="40.333796940194716" IsNewNode="True">
+                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="29.032258064516128" IsNewNode="True" />
+                <LayoutItem Id="Remarks" ViewItem="Remarks" Index="1" RelativeSize="20.967741935483872" IsNewNode="True" />
+                <LayoutItem Id="BaseRefNo" ViewItem="BaseRefNo" Index="2" RelativeSize="20.967741935483872" IsNewNode="True" />
+                <LayoutItem Id="BaseNum" ViewItem="BaseNum" Index="3" RelativeSize="29.032258064516128" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="2" RelativeSize="17.802503477051459" IsNewNode="True" />
+              <LayoutGroup Id="OGW10DREX_col1" RelativeSize="41.863699582753824">
+                <LayoutItem Id="BaseDate" RelativeSize="20.967741935483872" Index="2" />
+                <LayoutItem Id="BaseNum" RelativeSize="17.333333333333332" Index="3" Removed="True" />
+                <LayoutItem Id="Warehouse" RelativeSize="29.032258064516128" Index="3" />
+                <LayoutItem Id="BaseRefNo" RelativeSize="14.772727272727273" Index="4" Removed="True" />
+                <LayoutItem Id="Remarks" RelativeSize="12.871287128712872" Index="5" Removed="True" />
+                <LayoutItem Id="Status" RelativeSize="11.403508771929825" Index="5" Removed="True" />
+                <LayoutItem Id="MinDueBalance" RelativeSize="14.173228346456693" Index="8" Removed="True" />
+                <LayoutItem Id="MinimumDue" RelativeSize="9.2857142857142865" Index="8" Removed="True" />
+                <LayoutItem Id="OrderBalanceDue" RelativeSize="8.49673202614379" Index="8" Removed="True" />
+                <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="8" RelativeSize="14.173228346456693" Removed="True" />
+                <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="8" RelativeSize="9.2857142857142865" Removed="True" />
+                <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="9" RelativeSize="8.49673202614379" Removed="True" />
+                <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="9" RelativeSize="7.831325301204819" Removed="True" />
+                <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="10" RelativeSize="6.3414634146341466" Removed="True" />
+                <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="10" RelativeSize="5.9633027522935782" Removed="True" />
+                <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="10" RelativeSize="7.2625698324022343" Removed="True" />
+                <LayoutItem Id="Tax" ViewItem="Tax" Index="10" RelativeSize="6.770833333333333" Removed="True" />
+                <LayoutItem Id="CreditCard" RelativeSize="4.5936395759717312" Index="14" Removed="True" />
+                <LayoutItem Id="Voucher" RelativeSize="4.8148148148148149" Index="14" Removed="True" />
+                <LayoutItem Id="CreditNote" RelativeSize="4.3918918918918921" Index="16" Removed="True" />
+                <LayoutItem Id="Cash" RelativeSize="4.2071197411003238" Removed="True" />
+                <LayoutItem Id="DeliveryRequestDate" RelativeSize="20.967741935483872" />
+                <LayoutItem Id="DocNum" RelativeSize="29.032258064516128" />
+              </LayoutGroup>
+              <LayoutGroup Id="OGW10DREX_col2" RelativeSize="53.824756606397777" Caption="OGW10DREX_col2" Removed="True">
+                <LayoutItem Id="BillAddress1" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillAddress2" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillCity" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillCountry" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillDistrict" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillEmail" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillHomePhone" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillIdentityNo" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillMobilePhone" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillPostCode" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="BillRace" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryAddress1" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryAddress2" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryCity" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryContact" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryCountry" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryDistrict" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryHomePhone" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryMobilePhone" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryPostCode" RelativeSize="5.825242718446602" Index="0" Removed="True" />
+                <LayoutItem Id="DeliveryRace" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="BillName" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="55.688622754491021">
+            <LayoutGroup Id="OGW11DREX" RelativeSize="100">
+              <LayoutItem Id="OGW11DREX" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW12DREX" RelativeSize="100" Index="1">
+              <LayoutItem Id="OGW12DREX" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="100" Caption="Billing Info" IsNewNode="True">
+              <LayoutItem Id="BillName" ViewItem="BillName" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="BillAddress1" ViewItem="BillAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillAddress2" ViewItem="BillAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCity" ViewItem="BillCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillDistrict" ViewItem="BillDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillPostCode" ViewItem="BillPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCountry" ViewItem="BillCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillMobilePhone" ViewItem="BillMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillHomePhone" ViewItem="BillHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillEmail" ViewItem="BillEmail" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillIdentityNo" ViewItem="BillIdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillRace" ViewItem="BillRace" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="3" RelativeSize="100" Caption="Delivery Info" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="26.506024096385541" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW15DREX" RelativeSize="100" Index="4">
+              <LayoutItem Id="OGW15DREX" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100" Index="5">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="Autoda6ed48f-88f5-46ed-ad04-507e393c8fc7" ShowCaption="False" Caption="Autoda6ed48f-88f5-46ed-ad04-507e393c8fc7(48)" Direction="Horizontal" Index="2" RelativeSize="26.047904191616766" IsNewNode="True">
+            <LayoutGroup Id="Auto4e47a9cf-230a-43ee-b4a9-3f94a10cf9ba" ShowCaption="False" Caption="Auto4e47a9cf-230a-43ee-b4a9-3f94a10cf9ba(49)" Index="0" RelativeSize="49.798657718120808" IsNewNode="True">
+              <LayoutItem Id="Cash" ViewItem="Cash" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="CreditCard" ViewItem="CreditCard" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Voucher" ViewItem="Voucher" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="CreditNote" ViewItem="CreditNote" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto801450c3-af7b-4b2b-8222-09cc24678465" ShowCaption="False" Caption="Auto801450c3-af7b-4b2b-8222-09cc24678465(56)" Index="1" RelativeSize="50.201342281879192" IsNewNode="True">
+              <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Tax" ViewItem="Tax" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OGW10DREX_DetailView_View" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="OgawaPortal.Module.BusinessObjects.POS___Logistic.OGW10DREX" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="OGW10DREX_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="BaseDate" PropertyName="BaseDate" IsNewNode="True" />
+        <PropertyEditor Id="BaseNum" PropertyName="BaseNum" IsNewNode="True" />
+        <PropertyEditor Id="BaseRefNo" PropertyName="BaseRefNo" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress1" PropertyName="BillAddress1" IsNewNode="True" />
+        <PropertyEditor Id="BillAddress2" PropertyName="BillAddress2" IsNewNode="True" />
+        <PropertyEditor Id="BillCity" PropertyName="BillCity" IsNewNode="True" />
+        <PropertyEditor Id="BillCountry" PropertyName="BillCountry" IsNewNode="True" />
+        <PropertyEditor Id="BillDistrict" PropertyName="BillDistrict" IsNewNode="True" />
+        <PropertyEditor Id="BillEmail" PropertyName="BillEmail" IsNewNode="True" />
+        <PropertyEditor Id="BillHomePhone" PropertyName="BillHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillIdentityNo" PropertyName="BillIdentityNo" IsNewNode="True" />
+        <PropertyEditor Id="BillMobilePhone" PropertyName="BillMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="BillName" PropertyName="BillName" IsNewNode="True" />
+        <PropertyEditor Id="BillPostCode" PropertyName="BillPostCode" IsNewNode="True" />
+        <PropertyEditor Id="BillRace" PropertyName="BillRace" IsNewNode="True" />
+        <PropertyEditor Id="Cash" PropertyName="Cash" IsNewNode="True" />
+        <PropertyEditor Id="CreateDate" PropertyName="CreateDate" IsNewNode="True" />
+        <PropertyEditor Id="CreateUser" PropertyName="CreateUser" IsNewNode="True" />
+        <PropertyEditor Id="CreditCard" PropertyName="CreditCard" IsNewNode="True" />
+        <PropertyEditor Id="CreditNote" PropertyName="CreditNote" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress1" PropertyName="DeliveryAddress1" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryAddress2" PropertyName="DeliveryAddress2" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCity" PropertyName="DeliveryCity" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryContact" PropertyName="DeliveryContact" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryCountry" PropertyName="DeliveryCountry" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryDistrict" PropertyName="DeliveryDistrict" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryHomePhone" PropertyName="DeliveryHomePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryMobilePhone" PropertyName="DeliveryMobilePhone" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPostCode" PropertyName="DeliveryPostCode" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryRace" PropertyName="DeliveryRace" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryRequestDate" PropertyName="DeliveryRequestDate" IsNewNode="True" />
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+        <PropertyEditor Id="DocNum" PropertyName="DocNum" IsNewNode="True" />
+        <PropertyEditor Id="MinDueBalance" PropertyName="MinDueBalance" IsNewNode="True" />
+        <PropertyEditor Id="MinimumDue" PropertyName="MinimumDue" IsNewNode="True" />
+        <PropertyEditor Id="NetTotalDue" PropertyName="NetTotalDue" IsNewNode="True" />
+        <PropertyEditor Id="ObjType" PropertyName="ObjType" IsNewNode="True" />
+        <PropertyEditor Id="OGW11DREX" PropertyName="OGW11DREX" View="OGW10DREX_OGW11DREX_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW12DREX" PropertyName="OGW12DREX" View="OGW10DREX_OGW12DREX_ListView" IsNewNode="True" />
+        <PropertyEditor Id="OGW15DREX" PropertyName="OGW15DREX" View="OGW10DREX_OGW15DREX_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="OrderBalanceDue" PropertyName="OrderBalanceDue" IsNewNode="True" />
+        <PropertyEditor Id="OrderDiscount" PropertyName="OrderDiscount" IsNewNode="True" />
+        <PropertyEditor Id="PreviousPayment" PropertyName="PreviousPayment" IsNewNode="True" />
+        <PropertyEditor Id="Remarks" PropertyName="Remarks" IsNewNode="True" />
+        <PropertyEditor Id="SettlementDiscount" PropertyName="SettlementDiscount" IsNewNode="True" />
+        <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
+        <PropertyEditor Id="SubmitBy" PropertyName="SubmitBy" IsNewNode="True" />
+        <PropertyEditor Id="SubmitDate" PropertyName="SubmitDate" IsNewNode="True" />
+        <PropertyEditor Id="SubTotal" PropertyName="SubTotal" IsNewNode="True" />
+        <PropertyEditor Id="Tax" PropertyName="Tax" IsNewNode="True" />
+        <PropertyEditor Id="TotalDue" PropertyName="TotalDue" IsNewNode="True" />
+        <PropertyEditor Id="TotalPayment" PropertyName="TotalPayment" IsNewNode="True" />
+        <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Voucher" PropertyName="Voucher" IsNewNode="True" />
+        <PropertyEditor Id="Warehouse" PropertyName="Warehouse" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="18.263473053892216" IsNewNode="True">
+            <LayoutGroup Id="OGW10DREX_col1" ShowCaption="False" Index="0" RelativeSize="43.221476510067113" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRequestDate" ViewItem="DeliveryRequestDate" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="BaseDate" ViewItem="BaseDate" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto9c2d6550-c278-4ff6-bb68-d8468dab00bb" ShowCaption="False" Caption="Auto9c2d6550-c278-4ff6-bb68-d8468dab00bb(9)" Index="1" RelativeSize="39.597315436241608" IsNewNode="True">
+              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="29.508196721311474" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="1" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="BaseRefNo" ViewItem="BaseRefNo" Index="2" RelativeSize="21.311475409836067" IsNewNode="True" />
+              <LayoutItem Id="BaseNum" ViewItem="BaseNum" Index="3" RelativeSize="27.868852459016395" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="2" RelativeSize="17.181208053691275" IsNewNode="True" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="55.688622754491021" IsNewNode="True">
+            <LayoutGroup Id="OGW11DREX" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW11DREX" ViewItem="OGW11DREX" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW12DREX" Index="1" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW12DREX" ViewItem="OGW12DREX" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="100" Caption="Billing Info" IsNewNode="True">
+              <LayoutItem Id="BillName" ViewItem="BillName" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="BillAddress1" ViewItem="BillAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillAddress2" ViewItem="BillAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCity" ViewItem="BillCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillDistrict" ViewItem="BillDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillPostCode" ViewItem="BillPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillCountry" ViewItem="BillCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillMobilePhone" ViewItem="BillMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillHomePhone" ViewItem="BillHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillEmail" ViewItem="BillEmail" Index="9" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillIdentityNo" ViewItem="BillIdentityNo" Index="10" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="BillRace" ViewItem="BillRace" Index="11" RelativeSize="10.843373493975903" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="3" RelativeSize="100" Caption="Delivery Info" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="10.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="7.831325301204819" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="26.506024096385541" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW15DREX" Index="4" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="OGW15DREX" ViewItem="OGW15DREX" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" Index="5" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="Autoda6ed48f-88f5-46ed-ad04-507e393c8fc7" ShowCaption="False" Caption="Autoda6ed48f-88f5-46ed-ad04-507e393c8fc7(48)" Direction="Horizontal" Index="2" RelativeSize="26.047904191616766" IsNewNode="True">
+            <LayoutGroup Id="Auto4e47a9cf-230a-43ee-b4a9-3f94a10cf9ba" ShowCaption="False" Caption="Auto4e47a9cf-230a-43ee-b4a9-3f94a10cf9ba(49)" Index="0" RelativeSize="49.798657718120808" IsNewNode="True">
+              <LayoutItem Id="Cash" ViewItem="Cash" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="CreditCard" ViewItem="CreditCard" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Voucher" ViewItem="Voucher" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="CreditNote" ViewItem="CreditNote" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="PreviousPayment" ViewItem="PreviousPayment" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalPayment" ViewItem="TotalPayment" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto801450c3-af7b-4b2b-8222-09cc24678465" ShowCaption="False" Caption="Auto801450c3-af7b-4b2b-8222-09cc24678465(56)" Index="1" RelativeSize="50.201342281879192" IsNewNode="True">
+              <LayoutItem Id="SettlementDiscount" ViewItem="SettlementDiscount" Index="0" RelativeSize="19.540229885057471" IsNewNode="True" />
+              <LayoutItem Id="OrderDiscount" ViewItem="OrderDiscount" Index="1" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="Tax" ViewItem="Tax" Index="2" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="SubTotal" ViewItem="SubTotal" Index="3" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="NetTotalDue" ViewItem="NetTotalDue" Index="4" RelativeSize="14.942528735632184" IsNewNode="True" />
+              <LayoutItem Id="TotalDue" ViewItem="TotalDue" Index="5" RelativeSize="20.689655172413794" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <DetailView Id="OGW10EXCO_DetailView">
       <Items>
         <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
@@ -441,6 +887,107 @@
         <ColumnInfo Id="SeriesName" SortIndex="-1" SortOrder="None" />
       </Columns>
     </ListView>
+    <DetailView Id="OGW10OPKL_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="40.647482014388487" Direction="Horizontal">
+            <LayoutGroup Id="OGW10OPKL_col1" ShowCaption="False" Index="0" RelativeSize="42.590120160213615" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.929203539823009" IsNewNode="True" />
+              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="1" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="ExpectedDate" ViewItem="ExpectedDate" Index="2" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="DeliveryTime" ViewItem="DeliveryTime" Index="3" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="SalesOrderNo" ViewItem="SalesOrderNo" Index="4" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="SalesOrderDate" ViewItem="SalesOrderDate" Index="5" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="Transporter" ViewItem="Transporter" Index="6" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="7" RelativeSize="15.044247787610619" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW10OPKL_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="57.409879839786385" IsNewNode="True">
+              <LayoutGroup Id="Auto537caf9c-fef2-4308-99da-0150526f3af9" ShowCaption="False" Caption="Auto537caf9c-fef2-4308-99da-0150526f3af9(14)" Index="0" RelativeSize="70.232558139534888" IsNewNode="True">
+                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="15.929203539823009" IsNewNode="True" />
+                <LayoutItem Id="SORefNo" ViewItem="SORefNo" Index="1" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="DRRefNo" ViewItem="DRRefNo" Index="2" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="PLRefNo" ViewItem="PLRefNo" Index="3" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="SellerRemarks" ViewItem="SellerRemarks" Index="4" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="LogisticRemarks" ViewItem="LogisticRemarks" Index="5" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="DeliveryOrderRemarks" ViewItem="DeliveryOrderRemarks" Index="6" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="FullPayment" ViewItem="FullPayment" Index="7" RelativeSize="15.044247787610619" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="29.767441860465116" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW10OPKL" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="OGW10OPKL_col1" RelativeSize="31.40096618357488">
+                <LayoutItem Id="DRRefNo" RelativeSize="7.831325301204819" Index="6" Removed="True" />
+                <LayoutItem Id="PLRefNo" RelativeSize="8.49673202614379" Index="6" Removed="True" />
+                <LayoutItem Id="Transporter" RelativeSize="11.403508771929825" Index="6" />
+                <LayoutItem Id="Warehouse" RelativeSize="15.789473684210526" Index="7" />
+                <LayoutItem Id="SellerRemarks" RelativeSize="14.173228346456693" Index="8" Removed="True" />
+                <LayoutItem Id="Status" RelativeSize="9.2857142857142865" Index="8" Removed="True" />
+                <LayoutItem Id="DeliveryTime" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="DocDate" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="DocNum" RelativeSize="15.789473684210526" />
+                <LayoutItem Id="ExpectedDate" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="SalesOrderDate" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="SalesOrderNo" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="SORefNo" RelativeSize="7.2625698324022343" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="OGW10OPKL_col2" RelativeSize="68.59903381642512" Direction="Horizontal" Caption="OGW10OPKL_col2">
+                <LayoutGroup Id="Auto537caf9c-fef2-4308-99da-0150526f3af9" ShowCaption="False" Caption="" Index="0" RelativeSize="48.591549295774648" IsNewNode="True">
+                  <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="15.789473684210526" IsNewNode="True" />
+                  <LayoutItem Id="SORefNo" ViewItem="SORefNo" Index="1" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="DRRefNo" ViewItem="DRRefNo" Index="2" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="PLRefNo" ViewItem="PLRefNo" Index="3" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="SellerRemarks" ViewItem="SellerRemarks" Index="4" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="LogisticRemarks" ViewItem="LogisticRemarks" Index="5" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="DeliveryOrderRemarks" ViewItem="DeliveryOrderRemarks" Index="6" RelativeSize="27.192982456140349" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="51.408450704225352" IsNewNode="True" />
+                <LayoutItem Id="DeliveryAddress1" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryAddress2" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryCity" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryCountry" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryDistrict" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryHomePhone" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryMobilePhone" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryPostCode" RelativeSize="7.2625698324022343" Index="2" Removed="True" />
+                <LayoutItem Id="DeliveryRace" RelativeSize="82.681564245810051" Index="2" Removed="True" />
+                <LayoutItem Id="LogisticRemarks" RelativeSize="11.403508771929825" Index="5" Removed="True" />
+                <LayoutItem Id="DeliveryOrderRemarks" RelativeSize="27.192982456140349" Index="6" Removed="True" />
+                <LayoutItem Id="DeliveryContact" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="59.352517985611513">
+            <LayoutGroup Id="OGW11OPKL" RelativeSize="100">
+              <LayoutItem Id="OGW11OPKL" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW13OPKL" RelativeSize="100" Index="1">
+              <LayoutItem Id="OGW13OPKL" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="100" Caption="Delivery Info" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="12.857142857142858" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="12.857142857142858" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW15OPKL" RelativeSize="100" Index="3">
+              <LayoutItem Id="OGW15OPKL" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100" Index="4">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <DetailView Id="OGW10ORDN_DetailView">
       <Items>
         <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
@@ -1512,6 +2059,109 @@
         <ColumnInfo Id="CardHolderName" SortIndex="-1" SortOrder="None" />
       </Columns>
     </ListView>
+    <DetailView Id="OGW10PLEX_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="DetailAction" ActionContainer="ListView" Caption="DetailAction" Orientation="Vertical" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="40.647482014388487" Direction="Horizontal">
+            <LayoutGroup Id="OGW10PLEX_col1" ShowCaption="False" Index="0" RelativeSize="41.255006675567422" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.929203539823009" IsNewNode="True" />
+              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="1" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="ExpectedDate" ViewItem="ExpectedDate" Index="2" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="DeliveryTime" ViewItem="DeliveryTime" Index="3" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="SalesOrderNo" ViewItem="SalesOrderNo" Index="4" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="SalesOrderDate" ViewItem="SalesOrderDate" Index="5" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="Transporter" ViewItem="Transporter" Index="6" RelativeSize="11.504424778761061" IsNewNode="True" />
+              <LayoutItem Id="Warehouse" ViewItem="Warehouse" Index="7" RelativeSize="15.044247787610619" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW10PLEX_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="58.744993324432578" Caption="OGW10PLEX_col2" IsNewNode="True">
+              <LayoutGroup Id="Auto044efab6-87d0-489d-be11-8b46cc05078e" ShowCaption="False" Caption="Auto044efab6-87d0-489d-be11-8b46cc05078e(13)" Index="0" RelativeSize="70.9090909090909" IsNewNode="True">
+                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="15.929203539823009" IsNewNode="True" />
+                <LayoutItem Id="SORefNo" ViewItem="SORefNo" Index="1" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="DRRefNo" ViewItem="DRRefNo" Index="2" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="PLRefNo" ViewItem="PLRefNo" Index="3" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="SellerRemarks" ViewItem="SellerRemarks" Index="4" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="LogisticRemarks" ViewItem="LogisticRemarks" Index="5" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="DeliveryOrderRemarks" ViewItem="DeliveryOrderRemarks" Index="6" RelativeSize="11.504424778761061" IsNewNode="True" />
+                <LayoutItem Id="FullPayment" ViewItem="FullPayment" Index="7" RelativeSize="15.044247787610619" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="29.09090909090909" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW10PLEX" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="OGW10PLEX_col1" RelativeSize="29.973474801061009">
+                <LayoutItem Id="DRRefNo" RelativeSize="8.49673202614379" Index="6" Removed="True" />
+                <LayoutItem Id="PLRefNo" RelativeSize="9.2857142857142865" Index="6" Removed="True" />
+                <LayoutItem Id="Transporter" RelativeSize="11.403508771929825" Index="6" />
+                <LayoutItem Id="Warehouse" RelativeSize="15.789473684210526" Index="7" />
+                <LayoutItem Id="SellerRemarks" RelativeSize="14.173228346456693" Index="8" Removed="True" />
+                <LayoutItem Id="DeliveryTime" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="DocDate" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="DocNum" RelativeSize="15.789473684210526" />
+                <LayoutItem Id="ExpectedDate" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="SalesOrderDate" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="SalesOrderNo" RelativeSize="11.403508771929825" />
+                <LayoutItem Id="SORefNo" RelativeSize="7.831325301204819" Removed="True" />
+                <LayoutItem Id="Status" RelativeSize="7.2625698324022343" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="OGW10PLEX_col2" RelativeSize="70.026525198939" Caption="OGW10PLEX_col2" Direction="Horizontal">
+                <LayoutGroup Id="Auto520ed73b-565b-464f-8a79-10655dd7ab25" ShowCaption="False" Caption="" Index="0" RelativeSize="48.106060606060609" IsNewNode="True">
+                  <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="15.789473684210526" IsNewNode="True" />
+                  <LayoutItem Id="SORefNo" ViewItem="SORefNo" Index="1" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="DRRefNo" ViewItem="DRRefNo" Index="2" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="PLRefNo" ViewItem="PLRefNo" Index="3" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="SellerRemarks" ViewItem="SellerRemarks" Index="4" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="LogisticRemarks" ViewItem="LogisticRemarks" Index="5" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="DeliveryOrderRemarks" ViewItem="DeliveryOrderRemarks" Index="6" RelativeSize="11.403508771929825" IsNewNode="True" />
+                  <LayoutItem Id="FullPayment" ViewItem="FullPayment" Index="7" RelativeSize="15.789473684210526" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="DetailAction" ViewItem="DetailAction" Index="1" RelativeSize="51.893939393939391" IsNewNode="True" />
+                <LayoutItem Id="FullPayment" RelativeSize="15.789473684210526" Index="1" Removed="True" />
+                <LayoutItem Id="DeliveryAddress1" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryAddress2" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryCity" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryCountry" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryDistrict" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryHomePhone" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryMobilePhone" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryPostCode" RelativeSize="7.2625698324022343" Index="3" Removed="True" />
+                <LayoutItem Id="DeliveryRace" RelativeSize="75.977653631284923" Index="3" Removed="True" />
+                <LayoutItem Id="LogisticRemarks" RelativeSize="11.403508771929825" Index="5" Removed="True" />
+                <LayoutItem Id="DeliveryOrderRemarks" RelativeSize="11.403508771929825" Index="6" Removed="True" />
+                <LayoutItem Id="DeliveryContact" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="59.352517985611513">
+            <LayoutGroup Id="OGW11PLEX" RelativeSize="100">
+              <LayoutItem Id="OGW11PLEX" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW13PLEX" RelativeSize="100">
+              <LayoutItem Id="OGW13PLEX" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="100" Caption="Delivery Info" IsNewNode="True">
+              <LayoutItem Id="DeliveryContact" ViewItem="DeliveryContact" Index="0" RelativeSize="12.857142857142858" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress1" ViewItem="DeliveryAddress1" Index="1" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryAddress2" ViewItem="DeliveryAddress2" Index="2" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCity" ViewItem="DeliveryCity" Index="3" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryDistrict" ViewItem="DeliveryDistrict" Index="4" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryPostCode" ViewItem="DeliveryPostCode" Index="5" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryCountry" ViewItem="DeliveryCountry" Index="6" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryMobilePhone" ViewItem="DeliveryMobilePhone" Index="7" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryHomePhone" ViewItem="DeliveryHomePhone" Index="8" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="DeliveryRace" ViewItem="DeliveryRace" Index="9" RelativeSize="12.857142857142858" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OGW15PLEX" RelativeSize="100" Index="3">
+              <LayoutItem Id="OGW15PLEX" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100" Index="4">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="OGW10SLYT_ListView">
       <Columns>
         <ColumnInfo Id="Name" SortIndex="-1" SortOrder="None" />

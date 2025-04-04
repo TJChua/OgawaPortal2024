@@ -15,17 +15,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace OgawaPortal.Module.BusinessObjects.Sales_Order
+namespace OgawaPortal.Module.BusinessObjects.POS___Logistic
 {
-    [XafDisplayName("Sales Return Payment")]
+    [XafDisplayName("Exchange Delivery Request Payment")]
     [Appearance("LinkDoc", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("UnlinkDoc", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
 
-    [RuleCriteria("CashSaveValid", DefaultContexts.Save, "IsValid = 0", "Please select Consignment.")]
-    [RuleCriteria("VourcherSaveValid", DefaultContexts.Save, "IsValid1 = 0", "Please fill vourcher no. and vourcher type.")]
-    public class OGW12ORDR : XPObject
+    public class OGW12DREX : XPObject
     { 
-        public OGW12ORDR(Session session)
+        public OGW12DREX(Session session)
             : base(session)
         {
         }
@@ -36,11 +34,11 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
             CreateDate = DateTime.Now;
         }
 
-        private OGW10ORDR _DocEntry;
-        [Association("OGW10ORDR-OGW12ORDR")]
+        private OGW10DREX _DocEntry;
+        [Association("OGW10DREX-OGW12DREX")]
         [Index(0), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
         [Appearance("DocEntry", Enabled = false)]
-        public OGW10ORDR DocEntry
+        public OGW10DREX DocEntry
         {
             get { return _DocEntry; }
             set { SetPropertyValue("DocEntry", ref _DocEntry, value); }
@@ -500,7 +498,7 @@ namespace OgawaPortal.Module.BusinessObjects.Sales_Order
                         }
                     }
                 }
-               
+
                 return false;
             }
         }
